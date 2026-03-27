@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         HorizontalMove();  
         VerticalMove();
-        BlockHorizontalMovement();
+        ClampHorizontalPosition();
     }
 
     private void HorizontalMove()
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(0, verticalVelocity * Time.deltaTime, 0);
     }
 
-    private void BlockHorizontalMovement()
+    private void ClampHorizontalPosition()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -horizontalClamp, horizontalClamp),
             transform.position.y, transform.position.z);
@@ -94,15 +94,16 @@ public class PlayerController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             
             var currentProgress =  elapsedTime / hopTime;
-            
             var xDelta = Mathf.Lerp(0, moveVal * hopDistance, currentProgress);
             
-            transform.position = startPos + new Vector3(xDelta, 0, 0);
+            var newPos = startPos + new Vector3(xDelta, 0, 0);
 
-            if (transform.position.x < -horizontalClamp || transform.position.x > horizontalClamp)
+            if (newPos.x < -horizontalClamp || newPos.x > horizontalClamp)
             {
                 break;
             }
+            
+            transform.position = newPos;
             
             yield return null;
         }
