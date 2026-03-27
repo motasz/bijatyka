@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("References")] 
     public InputsReceiver inputs;
+    public PlayerController enemy;
 
-    [Header("Bondaries")] 
+    [Header("Boundaries")] 
     public float horizontalClamp = 8f;
     public float verticalClamp = -2.5f;
+    public float minimalPlayerDistance = 0.5f;
     
-    [Header("Movement")] 
+    [Header("Horizontal movement")] 
     public float hopTime = 0.2f;
-
     public float hopDistance = 1f;
-
     public float midAirSpeed = 1f;
 
+    [Header("Vertical movement")] 
     public float gravityForce = -20f;
     public float jumpForce = 10f;
 
     private Coroutine? moveCoroutine = null;
     
-    private bool isGrounded = false;
+    public bool isGrounded = false;
     private float verticalVelocity = 0f;
 
     void Update()
@@ -80,7 +82,9 @@ public class PlayerController : MonoBehaviour
 
     private void ClampHorizontalPosition()
     {
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -horizontalClamp, horizontalClamp),
+        var boundaries = GetBoundaries();
+        
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, boundaries.left, boundaries.right),
             transform.position.y, transform.position.z);
     }
 
@@ -98,10 +102,7 @@ public class PlayerController : MonoBehaviour
             
             var newPos = startPos + new Vector3(xDelta, 0, 0);
 
-            if (newPos.x < -horizontalClamp || newPos.x > horizontalClamp)
-            {
-                break;
-            }
+            if (!ValidatePosition(newPos)) break;
             
             transform.position = newPos;
             
@@ -109,5 +110,23 @@ public class PlayerController : MonoBehaviour
         }
         
         moveCoroutine = null;
+    }
+    
+    private bool IsEnemyToTheRight() => enemy.transform.position.x > transform.position.x;
+    
+    private float GetEffectivePlayerBoundary() => enemy.transform.position.x + (IsEnemyToTheRight() ? -minimalPlayerDistance : minimalPlayerDistance);
+
+    private (float left, float right) GetBoundaries()
+    {
+        if (!isGrounded || !enemy.isGrounded) return (-horizontalClamp, horizontalClamp);
+        
+        return (IsEnemyToTheRight() ? -horizontalClamp : GetEffectivePlayerBoundary(),
+            IsEnemyToTheRight() ? GetEffectivePlayerBoundary() : horizontalClamp);
+    }
+
+    private bool ValidatePosition(Vector3 pos)
+    {
+        var boundaries = GetBoundaries();
+        return boundaries.left < pos.x && pos.x < boundaries.right;
     }
 }

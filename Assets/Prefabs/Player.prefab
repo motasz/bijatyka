@@ -180,13 +180,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputs: {fileID: 2325418018889177129}
+  enemy: {fileID: 0}
   horizontalClamp: 8
   verticalClamp: -2.5
+  minimalPlayerDistance: 1
   hopTime: 0.2
   hopDistance: 1
   midAirSpeed: 7
   gravityForce: -30
   jumpForce: 15
+  isGrounded: 0
 --- !u!114 &2325418018889177129
 MonoBehaviour:
   m_ObjectHideFlags: 0
