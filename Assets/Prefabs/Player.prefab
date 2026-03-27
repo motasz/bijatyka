@@ -183,7 +183,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   horizontalClamp: 8
   verticalClamp: -2.5
-  minimalPlayerDistance: 1
+  minimalPlayerDistance: 1.4
   hopTime: 0.2
   hopDistance: 1
   midAirSpeed: 7
