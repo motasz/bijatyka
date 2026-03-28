@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         HorizontalMove();  
         VerticalMove();
         ClampHorizontalPosition();
+        RotatePlayer();
     }
 
     private void HorizontalMove()
@@ -110,6 +111,17 @@ public class PlayerController : MonoBehaviour
         }
         
         moveCoroutine = null;
+    }
+
+    private void RotatePlayer()
+    {
+        var rotateY = transform.rotation.eulerAngles.y;
+
+        var desiredRotationY = IsEnemyToTheRight() ? 0f : 180f;
+
+        if (Mathf.Approximately(desiredRotationY, rotateY)) return;
+        
+        transform.rotation = Quaternion.Euler(0, desiredRotationY, 0);
     }
     
     private bool IsEnemyToTheRight() => enemy.transform.position.x > transform.position.x;
