@@ -1,4 +1,6 @@
 using System.Collections;
+using Attack;
+using Data;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 
@@ -7,6 +9,9 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public InputsReceiver inputs;
     public PlayerController enemy;
+    public GameObject topProjectileSpawner;
+    public GameObject bottomProjectileSpawner;
+    public GameObject projectilePrefab;
 
     [Header("Boundaries")] 
     public float horizontalClamp = 8f;
@@ -22,6 +27,9 @@ public class PlayerController : MonoBehaviour
     public float gravityForce = -20f;
     public float jumpForce = 10f;
 
+    [Header("Attack")] 
+    public AttackData basicAttackData;
+
     private Coroutine? moveCoroutine = null;
     
     public bool isGrounded = false;
@@ -31,6 +39,7 @@ public class PlayerController : MonoBehaviour
     { 
         GravityEffect();
         Jump();
+        Attack();
         HorizontalMove();  
         VerticalMove();
         ClampHorizontalPosition();
@@ -59,6 +68,28 @@ public class PlayerController : MonoBehaviour
         {
             verticalVelocity = jumpForce;
         }
+    }
+
+    private void Attack()
+    {
+        if (!inputs.attack || moveCoroutine != null) return;
+
+        inputs.attack = false;
+        
+        if (inputs.move.y < 0)
+        {
+            Debug.Log("Spawning at bot");
+            SpawnAttackProjectile(bottomProjectileSpawner.transform.position);
+            return;
+        } 
+        
+        SpawnAttackProjectile(topProjectileSpawner.transform.position);
+    }
+
+    private void SpawnAttackProjectile(Vector3 pos)
+    {
+        var projectile =  Instantiate(projectilePrefab, pos, Quaternion.identity, transform);
+        projectile.GetComponent<Projectile>().Initialize(basicAttackData);
     }
 
     private void GravityEffect()
