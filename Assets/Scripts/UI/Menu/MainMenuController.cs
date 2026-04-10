@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ namespace UI.Menu
     {
         public List<ScreenData> screens;
         public string defaultScreenName = "main";
+        public GameObject selectionScreenCanvas;
         
         private ScreenData currentScreen;
         private int selectedButtonIndex = 0;
@@ -24,6 +26,8 @@ namespace UI.Menu
 
         private void Awake()
         {
+            Cursor.visible = false;
+            
             var defaultScreen = screens.Find(x => x.name == defaultScreenName);
 
             if (defaultScreen != null)
@@ -36,9 +40,14 @@ namespace UI.Menu
                return;
             }
             
-            SelectButton(selectedButtonIndex);
-
             moveAction = InputSystem.actions.FindAction("Move");
+        }
+
+        private void OnEnable()
+        {
+            Debug.Log("Start");
+            selectedButtonIndex = 0;
+            SelectButton(selectedButtonIndex);
         }
 
         private void Update()
@@ -65,6 +74,21 @@ namespace UI.Menu
             var button = currentScreen.buttons[selectedButtonIndex];
             
             button.Select();
+        }
+
+        public void StartGame()
+        {
+            selectionScreenCanvas.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
+        public void Quit()
+        {
+            #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
         }
     }
 }

@@ -21,6 +21,11 @@ namespace Data
         
         public void ResetCharacter(int index) =>  characters[index] = null;
         
-        public void ResetAll() =>  characters = new CharacterData[2];
+        public void ResetAll()
+        {
+            OnCharacterSelected?.Invoke(null, Turn.Player1);
+            OnCharacterSelected?.Invoke(null, Turn.Player2);
+            characters = new CharacterData[2];
+        }
     }
 }
