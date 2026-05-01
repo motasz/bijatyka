@@ -116,10 +116,10 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y <= verticalClamp)
         {
-            // nie chcemy zeby inputy ruchu zakolejkowane w input bufferze podczas lotu się odpalały
+            // nie chcemy zeby inputy ruchu zakolejkowane w input bufferze podczas lotu się odpalały ---- w sumie nie jestem tego pewny, na razie niech zostanie wykomentowane
             if (!isGrounded)
             {
-                inputs.Buffer.FlushInputs(InputType.Move);
+               // inputs.Buffer.FlushInputs(InputType.Move);
             }
             isGrounded = true;
             transform.position = new Vector3(transform.position.x, verticalClamp, transform.position.z);
