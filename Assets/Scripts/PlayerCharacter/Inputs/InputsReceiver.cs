@@ -1,16 +1,36 @@
+using System;
+using PlayerCharacter.Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum InputType
+{
+    Jump,
+    Move,
+    Attack
+}
 public class InputsReceiver : MonoBehaviour
 {
     public Vector2 move;
     public bool jump;
     public bool attack;
-    private void SetMove(Vector2 newVal) => move = newVal;
+    
+    public InputBuffer buffer = new InputBuffer();
 
-    private void SetJump(bool newVal) => jump = newVal;
+    private void Update()
+    {
+        buffer.Update();
+    }
 
-    private void SetAttack(bool newVal) => attack = newVal;
+    private void SetMove(Vector2 newVal)
+    {
+        buffer.AddInput(InputType.Move, newVal);
+        move = newVal;
+    }
+
+    private void SetJump(bool newVal) => buffer.AddInput(InputType.Jump);
+
+    private void SetAttack(bool newVal) => buffer.AddInput(InputType.Attack);
 
     public void OnMove(InputValue value) => SetMove(value.Get<Vector2>());
     
