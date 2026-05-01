@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (isGrounded && moveCoroutine != null && CheckInput(InputType.Jump))
+        if (isGrounded && moveCoroutine == null && CheckInput(InputType.Jump))
         {
             verticalVelocity = jumpForce;
         }
@@ -110,7 +110,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y <= verticalClamp)
         {
             // nie chcemy zeby inputy ruchu zakolejkowane w input bufferze podczas lotu się odpalały
-            inputs.Buffer.FlushInputs(InputType.Move);
+            if (!isGrounded)
+            {
+                inputs.Buffer.FlushInputs(InputType.Move);
+            }
             isGrounded = true;
             transform.position = new Vector3(transform.position.x, verticalClamp, transform.position.z);
             verticalVelocity = 0f;

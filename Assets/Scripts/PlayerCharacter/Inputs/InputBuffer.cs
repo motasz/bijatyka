@@ -19,7 +19,7 @@ namespace PlayerCharacter.Inputs
     public class InputBuffer
     {
         private readonly Queue<BufferedInput>  _buffer = new Queue<BufferedInput>();
-        private const float BufferTime = 0.15f;
+        private const float BufferTime = 0.10f;
 
         public void AddInput(InputType input, Vector2 value = default)
         {
