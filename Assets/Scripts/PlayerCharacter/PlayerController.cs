@@ -38,60 +38,67 @@ public class PlayerController : MonoBehaviour
     void Update()
     { 
         GravityEffect();
-        Jump();
-        Attack();
-        HorizontalMove();  
+        ProcessBufferedInput(); 
+        AerialMove();
         VerticalMove();
         ClampHorizontalPosition();
         RotatePlayer();
     }
 
-    private void HorizontalMove()
+    private void ProcessBufferedInput()
     {
-        // gdy jestesmy w powietrzu nie chcemy uzywac input buffera - ruch jest ciagly
-        if (!isGrounded)
-        {
-            AerialMove();
-            return;
-        }
+        if (moveCoroutine != null || !isGrounded) return;
+        
+        var buffer = inputs.Buffer;
+        
+        buffer.Update();
+        
+        var input = buffer.GetOldest();
 
-        if (moveCoroutine != null) return;
-        
-        var input = GetInput(InputType.Move);
+        if (input == null) return;
 
-        if (input == null || input.Value.x == 0) return;
-        
-        var moveValue = input.Value.x;
-        
-        if (!isGrounded)
+        switch (input.Input)
         {
-            transform.position += new Vector3(midAirSpeed * Time.deltaTime * moveValue, 0, 0);
-            return;
+            case InputType.Move:
+                HorizontalMove(input.Value);
+                break;
+            case InputType.Jump:
+                Jump();
+                break;
+            case InputType.Attack:
+                Attack();
+                break;
         }
+        
+        buffer.RemoveOldest();
+    }
+
+    private void HorizontalMove(Vector2 value)
+    {
+        var moveValue = value.x;
+
+        if (moveValue == 0) return;
 
         moveCoroutine = StartCoroutine(HopProcedure(moveValue));
     }
 
+    // gdy jestesmy w powietrzu nie chcemy uzywac input buffera - ruch jest ciagly
     private void AerialMove()
     {
+        if (isGrounded) return;
         transform.position += new Vector3(midAirSpeed * Time.deltaTime * inputs.move.x, 0, 0);
     }
 
     private void Jump()
     {
-        if (isGrounded && moveCoroutine == null && CheckInput(InputType.Jump))
-        {
-            verticalVelocity = jumpForce;
-        }
+        
+        verticalVelocity = jumpForce;
     }
 
     private void Attack()
     {
-        if (moveCoroutine != null || !CheckInput(InputType.Attack)) return;
-        
         if (inputs.move.y < 0)
         {
-            Debug.Log("Spawning at bot");
             SpawnAttackProjectile(bottomProjectileSpawner.transform.position);
             return;
         } 
@@ -187,7 +194,7 @@ public class PlayerController : MonoBehaviour
     private bool ValidatePosition(Vector3 pos)
     {
         var boundaries = GetBoundaries();
-        return boundaries.left < pos.x && pos.x < boundaries.right;
+        return boundaries.left < pos.x && pos.x < boundaries.right; 
     }
 
     private BufferedInput? GetInput(InputType input)

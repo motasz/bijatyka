@@ -22,8 +22,10 @@ public class InputsReceiver : MonoBehaviour
 
     private void SetMove(Vector2 newVal)
     {
-        Buffer.AddInput(InputType.Move, newVal);
         move = newVal;
+        Debug.Log(move);
+        if (newVal.x == 0) return;
+        Buffer.AddInput(InputType.Move, newVal);
     }
 
     private void SetJump() => Buffer.AddInput(InputType.Jump);

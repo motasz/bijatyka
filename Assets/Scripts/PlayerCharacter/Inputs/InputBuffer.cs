@@ -43,6 +43,16 @@ namespace PlayerCharacter.Inputs
             }
         }
 
+        public void RemoveOldest()
+        {
+            _buffer.Dequeue();
+        }
+
+        public BufferedInput? GetOldest()
+        {
+            return _buffer.Count == 0 ? null : _buffer.Peek();
+        }
+
         public BufferedInput? TryConsume(InputType input)
         {
             var count = _buffer.Count;
