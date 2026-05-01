@@ -12,25 +12,23 @@ public enum InputType
 public class InputsReceiver : MonoBehaviour
 {
     public Vector2 move;
-    public bool jump;
-    public bool attack;
     
-    public InputBuffer buffer = new InputBuffer();
+    public readonly InputBuffer Buffer = new ();
 
     private void Update()
     {
-        buffer.Update();
+        Buffer.Update();
     }
 
     private void SetMove(Vector2 newVal)
     {
-        buffer.AddInput(InputType.Move, newVal);
+        Buffer.AddInput(InputType.Move, newVal);
         move = newVal;
     }
 
-    private void SetJump(bool newVal) => buffer.AddInput(InputType.Jump);
+    private void SetJump(bool newVal) => Buffer.AddInput(InputType.Jump);
 
-    private void SetAttack(bool newVal) => buffer.AddInput(InputType.Attack);
+    private void SetAttack(bool newVal) => Buffer.AddInput(InputType.Attack);
 
     public void OnMove(InputValue value) => SetMove(value.Get<Vector2>());
     

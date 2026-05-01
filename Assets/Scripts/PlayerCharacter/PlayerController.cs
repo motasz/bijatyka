@@ -59,9 +59,9 @@ public class PlayerController : MonoBehaviour
         
         var input = GetInput(InputType.Move);
 
-        if (input == null || input.value.x == 0) return;
+        if (input == null || input.Value.x == 0) return;
         
-        var moveValue = input.value.x;
+        var moveValue = input.Value.x;
         
         if (!isGrounded)
         {
@@ -87,9 +87,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        if (!inputs.attack || moveCoroutine != null || !CheckInput(InputType.Attack)) return;
-
-        inputs.attack = false;
+        if (moveCoroutine != null || !CheckInput(InputType.Attack)) return;
         
         if (inputs.move.y < 0)
         {
@@ -112,7 +110,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y <= verticalClamp)
         {
             // nie chcemy zeby inputy ruchu zakolejkowane w input bufferze podczas lotu się odpalały
-            inputs.buffer.FlushInputs(InputType.Move);
+            inputs.Buffer.FlushInputs(InputType.Move);
             isGrounded = true;
             transform.position = new Vector3(transform.position.x, verticalClamp, transform.position.z);
             verticalVelocity = 0f;
@@ -120,7 +118,6 @@ public class PlayerController : MonoBehaviour
         }
         
         verticalVelocity += gravityForce * Time.deltaTime;
-        inputs.jump = false;
         isGrounded = false;
     }
 
@@ -192,7 +189,7 @@ public class PlayerController : MonoBehaviour
 
     private BufferedInput? GetInput(InputType input)
     {
-        return inputs.buffer.TryConsume(input);
+        return inputs.Buffer.TryConsume(input);
     }
 
     private bool CheckInput(InputType input)

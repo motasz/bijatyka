@@ -5,36 +5,36 @@ namespace PlayerCharacter.Inputs
 {
     public class BufferedInput
     {
-        public float time;
-        public InputType input;
-        public Vector2 value;
+        public readonly float Time;
+        public readonly InputType Input;
+        public Vector2 Value;
 
         public BufferedInput(InputType input, float time, Vector2 value = default)
         {
-            this.input = input;
-            this.time = time;
-            this.value = value;
+            Input = input;
+            Time = time;
+            Value = value;
         }
     }
     public class InputBuffer
     {
-        private Queue<BufferedInput>  buffer = new Queue<BufferedInput>();
-        private float bufferTime = 0.15f;
+        private readonly Queue<BufferedInput>  _buffer = new Queue<BufferedInput>();
+        private const float BufferTime = 0.15f;
 
         public void AddInput(InputType input, Vector2 value = default)
         {
-            buffer.Enqueue(new BufferedInput(input, Time.time, value));
+            _buffer.Enqueue(new BufferedInput(input, Time.time, value));
         }
 
         public void Update()
         {
-            while (buffer.Count > 0)
+            while (_buffer.Count > 0)
             {
-                var oldest = buffer.Peek();
+                var oldest = _buffer.Peek();
 
-                if (Time.time - oldest.time > bufferTime)
+                if (Time.time - oldest.Time > BufferTime)
                 {
-                    buffer.Dequeue();
+                    _buffer.Dequeue();
                 }
                 else
                 {
@@ -45,20 +45,20 @@ namespace PlayerCharacter.Inputs
 
         public BufferedInput? TryConsume(InputType input)
         {
-            var count = buffer.Count;
+            var count = _buffer.Count;
             BufferedInput? found = null;
             
             for (var i = 0; i < count; i++)
             {
-                var current = buffer.Dequeue();
+                var current = _buffer.Dequeue();
                 
-                if (found == null && current.input == input)
+                if (found == null && current.Input == input)
                 {
                     found = current;
                     continue;
                 }
                 
-                buffer.Enqueue(current);
+                _buffer.Enqueue(current);
             }
             
             return found;
@@ -66,18 +66,18 @@ namespace PlayerCharacter.Inputs
 
         public void FlushInputs(InputType input)
         {
-            var count = buffer.Count;
+            var count = _buffer.Count;
             
             for (var i = 0; i < count; i++)
             {
-                var current = buffer.Dequeue();
+                var current = _buffer.Dequeue();
 
-                if (current.input == input)
+                if (current.Input == input)
                 {
                     continue;
                 }
                 
-                buffer.Enqueue(current);
+                _buffer.Enqueue(current);
             }
         }
     }
