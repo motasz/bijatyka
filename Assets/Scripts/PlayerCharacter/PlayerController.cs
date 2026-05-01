@@ -196,14 +196,4 @@ public class PlayerController : MonoBehaviour
         var boundaries = GetBoundaries();
         return boundaries.left < pos.x && pos.x < boundaries.right; 
     }
-
-    private BufferedInput? GetInput(InputType input)
-    {
-        return inputs.Buffer.TryConsume(input);
-    }
-
-    private bool CheckInput(InputType input)
-    {
-        return GetInput(input) != null;
-    }
 }

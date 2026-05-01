@@ -53,28 +53,7 @@ namespace PlayerCharacter.Inputs
             return _buffer.Count == 0 ? null : _buffer.Peek();
         }
 
-        public BufferedInput? TryConsume(InputType input)
-        {
-            var count = _buffer.Count;
-            BufferedInput? found = null;
-            
-            for (var i = 0; i < count; i++)
-            {
-                var current = _buffer.Dequeue();
-                
-                if (found == null && current.Input == input)
-                {
-                    found = current;
-                    continue;
-                }
-                
-                _buffer.Enqueue(current);
-            }
-            
-            return found;
-        }
-
-        public void FlushInputs(InputType input)
+        public void FlushInputs(InputType input = default)
         {
             var count = _buffer.Count;
             
@@ -82,7 +61,7 @@ namespace PlayerCharacter.Inputs
             {
                 var current = _buffer.Dequeue();
 
-                if (current.Input == input)
+                if (current.Input == input || input == default)
                 {
                     continue;
                 }
