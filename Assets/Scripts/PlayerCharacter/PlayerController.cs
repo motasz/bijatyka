@@ -1,6 +1,7 @@
 using System.Collections;
 using Attack;
 using Data;
+using PlayerCharacter.Inputs;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 
@@ -34,51 +35,70 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = false;
     private float verticalVelocity = 0f;
-
     void Update()
     { 
         GravityEffect();
-        Jump();
-        Attack();
-        HorizontalMove();  
+        ProcessBufferedInput(); 
+        AerialMove();
         VerticalMove();
         ClampHorizontalPosition();
         RotatePlayer();
     }
 
-    private void HorizontalMove()
+    private void ProcessBufferedInput()
     {
+        if (moveCoroutine != null || !isGrounded) return;
         
-        var moveValue = inputs.move.x;
+        var buffer = inputs.Buffer;
         
-        if (moveValue == 0) return;
+        buffer.Update();
         
-        if (!isGrounded)
-        {
-            transform.position += new Vector3(midAirSpeed * Time.deltaTime * moveValue, 0, 0);
-            return;
-        }
+        var input = buffer.GetOldest();
 
-        if (moveCoroutine == null) moveCoroutine = StartCoroutine(HopProcedure(moveValue));
+        if (input == null) return;
+
+        switch (input.Input)
+        {
+            case InputType.Move:
+                HorizontalMove(input.Value);
+                break;
+            case InputType.Jump:
+                Jump();
+                break;
+            case InputType.Attack:
+                Attack();
+                break;
+        }
+        
+        buffer.RemoveOldest();
+    }
+
+    private void HorizontalMove(Vector2 value)
+    {
+        var moveValue = value.x;
+
+        if (moveValue == 0) return;
+
+        moveCoroutine = StartCoroutine(HopProcedure(moveValue));
+    }
+
+    // gdy jestesmy w powietrzu nie chcemy uzywac input buffera - ruch jest ciagly
+    private void AerialMove()
+    {
+        if (isGrounded) return;
+        transform.position += new Vector3(midAirSpeed * Time.deltaTime * inputs.move.x, 0, 0);
     }
 
     private void Jump()
     {
-        if (isGrounded && inputs.jump)
-        {
-            verticalVelocity = jumpForce;
-        }
+        
+        verticalVelocity = jumpForce;
     }
 
     private void Attack()
     {
-        if (!inputs.attack || moveCoroutine != null) return;
-
-        inputs.attack = false;
-        
         if (inputs.move.y < 0)
         {
-            Debug.Log("Spawning at bot");
             SpawnAttackProjectile(bottomProjectileSpawner.transform.position);
             return;
         } 
@@ -96,6 +116,11 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y <= verticalClamp)
         {
+            // nie chcemy zeby inputy ruchu zakolejkowane w input bufferze podczas lotu się odpalały ---- w sumie nie jestem tego pewny, na razie niech zostanie wykomentowane
+            if (!isGrounded)
+            {
+               // inputs.Buffer.FlushInputs(InputType.Move);
+            }
             isGrounded = true;
             transform.position = new Vector3(transform.position.x, verticalClamp, transform.position.z);
             verticalVelocity = 0f;
@@ -103,7 +128,6 @@ public class PlayerController : MonoBehaviour
         }
         
         verticalVelocity += gravityForce * Time.deltaTime;
-        inputs.jump = false;
         isGrounded = false;
     }
 
@@ -170,6 +194,6 @@ public class PlayerController : MonoBehaviour
     private bool ValidatePosition(Vector3 pos)
     {
         var boundaries = GetBoundaries();
-        return boundaries.left < pos.x && pos.x < boundaries.right;
+        return boundaries.left < pos.x && pos.x < boundaries.right; 
     }
 }
