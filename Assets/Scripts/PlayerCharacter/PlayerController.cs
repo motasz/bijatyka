@@ -5,14 +5,28 @@ using PlayerCharacter.Inputs;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 
+public enum ControllerState
+{
+    Walk,
+    Jump,
+    Idle,
+    Hit,
+    AttackTopWindUp,
+    AttackTopActive,
+    AttackTopWindDown,
+    AttackBotWindUp,
+    AttackBotActive,
+    AttackBotWindDown,
+}
+
 public class PlayerController : MonoBehaviour
 {
     [Header("References")] 
     public InputsReceiver inputs;
     public PlayerController enemy;
-    public GameObject topProjectileSpawner;
-    public GameObject bottomProjectileSpawner;
-    public GameObject projectilePrefab;
+    public Animator animator;
+    public GameObject topBasicAttackHitbox;
+    public GameObject botBasicAttackHitbox;
 
     [Header("Boundaries")] 
     public float horizontalClamp = 8f;
@@ -33,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine? moveCoroutine = null;
     
+    [SerializeField]
+    private ControllerState  state = ControllerState.Idle;
+    
     public bool isGrounded = false;
     private float verticalVelocity = 0f;
     void Update()
@@ -43,6 +60,19 @@ public class PlayerController : MonoBehaviour
         VerticalMove();
         ClampHorizontalPosition();
         RotatePlayer();
+        UpdateAnimator();
+    }
+
+    private void UpdateAnimator()
+    {
+        if (!animator || animator.GetInteger("State") == (int)state) return;
+        
+        animator.SetInteger("State", (int)state);
+    }
+
+    private void BackToIdle()
+    {
+        state = ControllerState.Idle;
     }
 
     private void ProcessBufferedInput()
@@ -91,25 +121,40 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        state = ControllerState.Jump;
         
         verticalVelocity = jumpForce;
     }
 
     private void Attack()
     {
-        if (inputs.move.y < 0)
-        {
-            SpawnAttackProjectile(bottomProjectileSpawner.transform.position);
-            return;
-        } 
-        
-        SpawnAttackProjectile(topProjectileSpawner.transform.position);
+        var isTop = inputs.move.y >= 0;
+
+        moveCoroutine = StartCoroutine(StandardAttackProcedure(isTop));
     }
 
-    private void SpawnAttackProjectile(Vector3 pos)
+    private IEnumerator StandardAttackProcedure(bool isTop)
     {
-        var projectile =  Instantiate(projectilePrefab, pos, Quaternion.identity, transform);
-        projectile.GetComponent<Projectile>().Initialize(basicAttackData);
+        state = isTop ? ControllerState.AttackTopWindUp : ControllerState.AttackBotWindUp;
+        yield return new WaitForSeconds(basicAttackData.windUp);
+
+        state = isTop ? ControllerState.AttackTopActive : ControllerState.AttackBotActive;
+        
+        if (isTop)
+        {
+            topBasicAttackHitbox.SetActive(true);
+        }
+        else botBasicAttackHitbox.SetActive(true);
+        
+        yield return new WaitForSeconds(basicAttackData.active);
+
+        topBasicAttackHitbox.SetActive(false);
+        botBasicAttackHitbox.SetActive(false);
+        state = isTop ? ControllerState.AttackTopWindDown : ControllerState.AttackBotWindDown;
+        yield return new WaitForSeconds(basicAttackData.windDown);
+        
+        moveCoroutine = null;
+        BackToIdle();
     }
 
     private void GravityEffect()
@@ -146,6 +191,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HopProcedure(float moveVal)
     {
+        state = ControllerState.Walk;
         var elapsedTime = 0f;
         var startPos = transform.position;
 
@@ -166,6 +212,7 @@ public class PlayerController : MonoBehaviour
         }
         
         moveCoroutine = null;
+        BackToIdle();
     }
 
     private void RotatePlayer()

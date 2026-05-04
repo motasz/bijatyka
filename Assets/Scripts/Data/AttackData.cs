@@ -8,5 +8,8 @@ namespace Data
         public int damage;
         public float distance = 1;
         public float duration;
+        public float windUp;
+        public float active;
+        public float windDown;
     }
 }
