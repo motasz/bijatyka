@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Attack;
 using Data;
@@ -7,16 +8,17 @@ using UnityEngine;
 
 public enum ControllerState
 {
-    Walk,
-    Jump,
-    Idle,
-    Hit,
-    AttackTopWindUp,
-    AttackTopActive,
-    AttackTopWindDown,
-    AttackBotWindUp,
-    AttackBotActive,
-    AttackBotWindDown,
+    Idle = 0,
+    Walk = 1,
+    Air = 2,
+    Hit = 3,
+    AttackTopWindUp = 4,
+    AttackTopActive = 5,
+    AttackTopWindDown = 6,
+    AttackBotWindUp = 7,
+    AttackBotActive = 8,
+    AttackBotWindDown = 9,
+    Dodge = 10,
 }
 
 public class PlayerController : MonoBehaviour
@@ -24,7 +26,6 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public InputsReceiver inputs;
     public PlayerController enemy;
-    public Animator animator;
     public GameObject topBasicAttackHitbox;
     public GameObject botBasicAttackHitbox;
 
@@ -52,6 +53,14 @@ public class PlayerController : MonoBehaviour
     
     public bool isGrounded = false;
     private float verticalVelocity = 0f;
+
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     void Update()
     { 
         GravityEffect();
@@ -63,11 +72,19 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
     }
 
-    private void UpdateAnimator()
+    private int GetAnimationState()
     {
-        if (!animator || animator.GetInteger("State") == (int)state) return;
+        if (state == ControllerState.Walk) return (int)ControllerState.Air;
+
+        return (int)state;
+    }
+    private void UpdateAnimator() 
+    {
+        var animationState = GetAnimationState();
         
-        animator.SetInteger("State", (int)state);
+        if (!_animator || _animator.GetInteger("state") == animationState) return;
+        
+        _animator.SetInteger("state", animationState);
     }
 
     private void BackToIdle()
@@ -121,8 +138,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        state = ControllerState.Jump;
-        
         verticalVelocity = jumpForce;
     }
 
@@ -166,6 +181,12 @@ public class PlayerController : MonoBehaviour
             {
                // inputs.Buffer.FlushInputs(InputType.Move);
             }
+
+            if (state == ControllerState.Air)
+            {
+                BackToIdle();
+            }
+            
             isGrounded = true;
             transform.position = new Vector3(transform.position.x, verticalClamp, transform.position.z);
             verticalVelocity = 0f;
@@ -173,6 +194,7 @@ public class PlayerController : MonoBehaviour
         }
         
         verticalVelocity += gravityForce * Time.deltaTime;
+        state = ControllerState.Air;
         isGrounded = false;
     }
 

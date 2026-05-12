@@ -7,7 +7,9 @@ public enum InputType
 {
     Jump,
     Move,
-    Attack
+    Attack,
+    DodgeUp,
+    DodgeDown
 }
 public class InputsReceiver : MonoBehaviour
 {
@@ -31,10 +33,18 @@ public class InputsReceiver : MonoBehaviour
     private void SetJump() => Buffer.AddInput(InputType.Jump);
 
     private void SetAttack() => Buffer.AddInput(InputType.Attack);
-
+    
+    private void  SetDodgeUp() => Buffer.AddInput(InputType.DodgeUp);
+    
+    private void  SetDodgeDown() => Buffer.AddInput(InputType.DodgeDown);
+    
     public void OnMove(InputValue value) => SetMove(value.Get<Vector2>());
     
     public void OnJump(InputValue value) => SetJump();
 
     public void OnAttack(InputValue value) => SetAttack();
+    
+    public void OnDodgeUp(InputValue value) =>  SetDodgeUp();
+    
+    public void OnDodgeDown(InputValue value) =>  SetDodgeDown();
 }

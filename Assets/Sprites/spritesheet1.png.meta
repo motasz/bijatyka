@@ -1,0 +1,411 @@
+fileFormatVersion: 2
+guid: 737bc5a4a9d34ca4c841c13b278c9ff2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2925104101223506679
+    second: spritesheet-finfin_0
+  - first:
+      213: 6741784883925466225
+    second: spritesheet-finfin_1
+  - first:
+      213: -4204473474638043218
+    second: spritesheet-finfin_2
+  - first:
+      213: 1160109036078056864
+    second: spritesheet-finfin_3
+  - first:
+      213: 942413127160065323
+    second: spritesheet-finfin_4
+  - first:
+      213: 4708053086076455939
+    second: spritesheet-finfin_5
+  - first:
+      213: 1013955267820711526
+    second: spritesheet-finfin_6
+  - first:
+      213: 8904340655175480625
+    second: spritesheet-finfin_7
+  - first:
+      213: 2550522671287290183
+    second: spritesheet-finfin_8
+  - first:
+      213: 565375098055369918
+    second: spritesheet-finfin_9
+  - first:
+      213: 602931388046270022
+    second: spritesheet-finfin_10
+  - first:
+      213: -2782441370133999164
+    second: spritesheet-finfin_11
+  - first:
+      213: 2008209665022458262
+    second: spritesheet-finfin_12
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: america-idle01
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 802
+        width: 184
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f22774aeae089820800000000000000
+      internalID: 2925104101223506679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-idle02
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 802
+        width: 184
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17cb976e1a1af8d50800000000000000
+      internalID: 6741784883925466225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-idle03
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 802
+        width: 167
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7a5aca6a5b6a5c0800000000000000
+      internalID: -4204473474638043218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-punch-wind-up
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 576
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a547249509891010800000000000000
+      internalID: 1160109036078056864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-punch-active
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 578
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d6a0cfebf141d00800000000000000
+      internalID: 942413127160065323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-punch-wind-down
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 576
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30cc443665d565140800000000000000
+      internalID: 4708053086076455939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-kick-wind-up
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 354
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66ee694a1fa421e00800000000000000
+      internalID: 1013955267820711526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-kick-active
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 354
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 749c8a53bd6456320800000000000000
+      internalID: 2550522671287290183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-kick-wind-down
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 352
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4217cf7ad98d700800000000000000
+      internalID: 565375098055369918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-dodge
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 96
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e5e6827ea0e5800800000000000000
+      internalID: 602931388046270022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: america-air
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 96
+        width: 184
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c1dfccd058c269d0800000000000000
+      internalID: -2782441370133999164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: eaecf302df5dcc54ea2dd7a2d14e3b81
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      america-air: -2782441370133999164
+      america-dodge: 602931388046270022
+      america-idle01: 2925104101223506679
+      america-idle02: 6741784883925466225
+      america-idle03: -4204473474638043218
+      america-kick-active: 2550522671287290183
+      america-kick-wind-down: 565375098055369918
+      america-kick-wind-up: 1013955267820711526
+      america-punch-active: 942413127160065323
+      america-punch-wind-down: 4708053086076455939
+      america-punch-wind-up: 1160109036078056864
+      spritesheet-finfin_12: 2008209665022458262
+      spritesheet-finfin_7: 8904340655175480625
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
