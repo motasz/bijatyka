@@ -4,8 +4,15 @@ using UnityEngine;
 
 namespace PlayerCharacter
 {
+    [Serializable]
+    public enum DodgeState
+    {
+        Top,
+        Bot
+    }
     public class HitDetector: MonoBehaviour
     {
+        public DodgeState? dodgeState = null;
         private PlayerState _playerState;
 
         private void Awake()
@@ -15,14 +22,14 @@ namespace PlayerCharacter
 
         private void OnTriggerEnter2D (Collider2D other)
         {
-            var projectile = other.gameObject.GetComponent<Projectile>();
+            Debug.Log($"Collision at {dodgeState}");
+            var attack = other.gameObject.GetComponent<AttackController>();
 
-            if (projectile?.attackData == null) return;
+            if (attack.damage == 0 || (attack.dodgeableBy != null && attack.dodgeableBy == dodgeState)) return;
 
             if (other.transform.parent.CompareTag(transform.tag)) return;
             
-            _playerState.ModifyHp(-projectile.attackData.damage);
-            Destroy(other.gameObject);
+            _playerState.ModifyHp(-attack.damage);
         }
     }
 }

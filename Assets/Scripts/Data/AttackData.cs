@@ -11,5 +11,6 @@ namespace Data
         public float windUp;
         public float active;
         public float windDown;
+        public float activeMovement;
     }
 }

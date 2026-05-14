@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using Attack;
 using Data;
+using PlayerCharacter;
 using PlayerCharacter.Inputs;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
+using Math = System.Math;
 
 public enum ControllerState
 {
@@ -18,7 +20,8 @@ public enum ControllerState
     AttackBotWindUp = 7,
     AttackBotActive = 8,
     AttackBotWindDown = 9,
-    Dodge = 10,
+    DodgeTop = 10,
+    DodgeBot = 11,
 }
 
 public class PlayerController : MonoBehaviour
@@ -26,8 +29,8 @@ public class PlayerController : MonoBehaviour
     [Header("References")] 
     public InputsReceiver inputs;
     public PlayerController enemy;
-    public GameObject topBasicAttackHitbox;
-    public GameObject botBasicAttackHitbox;
+    public AttackController topBasicAttackHitbox;
+    public AttackController botBasicAttackHitbox;
 
     [Header("Boundaries")] 
     public float horizontalClamp = 8f;
@@ -45,24 +48,33 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attack")] 
     public AttackData basicAttackData;
+    public float dodgeDuration = 0.1f;
+    public float attackMovement = 0.2f;
 
     private Coroutine? moveCoroutine = null;
     
     [SerializeField]
     private ControllerState  state = ControllerState.Idle;
     
+    private HitDetector _hitDetector;
     public bool isGrounded = false;
     private float verticalVelocity = 0f;
 
     private Animator _animator;
 
+    private int _currentStateFrameCounter = 0;
+    private ControllerState _previousStateBuffer;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _hitDetector = GetComponent<HitDetector>();
+        _previousStateBuffer = state;
     }
 
     void Update()
     { 
+        UpdateFrameCounter();
         GravityEffect();
         ProcessBufferedInput(); 
         AerialMove();
@@ -72,9 +84,22 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
     }
 
+    void UpdateFrameCounter()
+    {
+        Debug.Log(_currentStateFrameCounter);
+        if (_previousStateBuffer == state)
+        {
+            ++_currentStateFrameCounter;
+            return;
+        }
+
+        _previousStateBuffer = state;
+        _currentStateFrameCounter = 0;
+    }
+
     private int GetAnimationState()
     {
-        if (state == ControllerState.Walk) return (int)ControllerState.Air;
+        if (state == ControllerState.Walk || state == ControllerState.DodgeTop) return (int)ControllerState.Air;
 
         return (int)state;
     }
@@ -94,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessBufferedInput()
     {
-        if (moveCoroutine != null || !isGrounded) return;
+        if (moveCoroutine != null || !isGrounded || state == ControllerState.Air) return;
         
         var buffer = inputs.Buffer;
         
@@ -114,6 +139,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case InputType.Attack:
                 Attack();
+                break;
+            case InputType.DodgeUp:
+                Dodge(DodgeState.Top);
+                break;
+            case InputType.DodgeDown:
+                Dodge(DodgeState.Bot);
                 break;
         }
         
@@ -148,6 +179,27 @@ public class PlayerController : MonoBehaviour
         moveCoroutine = StartCoroutine(StandardAttackProcedure(isTop));
     }
 
+    private void Dodge(DodgeState position)
+    {
+        moveCoroutine = StartCoroutine(DodgeProcedure(position));
+    }
+
+    private IEnumerator DodgeProcedure(DodgeState position)
+    {
+        ControllerState dodgeState = position == DodgeState.Top ? ControllerState.DodgeTop : ControllerState.DodgeBot;
+
+        state = dodgeState;
+
+        Debug.Log($"changing hit detector to {position}");
+        _hitDetector.dodgeState = position;
+        yield return new WaitForSeconds(dodgeDuration);
+
+        _hitDetector.dodgeState = null;
+
+        moveCoroutine = null;
+        BackToIdle();
+    }
+
     private IEnumerator StandardAttackProcedure(bool isTop)
     {
         state = isTop ? ControllerState.AttackTopWindUp : ControllerState.AttackBotWindUp;
@@ -157,14 +209,33 @@ public class PlayerController : MonoBehaviour
         
         if (isTop)
         {
-            topBasicAttackHitbox.SetActive(true);
+            topBasicAttackHitbox.Activate();
         }
-        else botBasicAttackHitbox.SetActive(true);
-        
-        yield return new WaitForSeconds(basicAttackData.active);
+        else botBasicAttackHitbox.Activate();
 
-        topBasicAttackHitbox.SetActive(false);
-        botBasicAttackHitbox.SetActive(false);
+        var elapsedTime = 0f;
+        var startPos = transform.position;
+
+        while (elapsedTime < basicAttackData.active)
+        {
+            elapsedTime += Time.deltaTime;
+            var xDelta = Mathf.Lerp(0, basicAttackData.activeMovement, elapsedTime / basicAttackData.active);
+            
+            var newPos = transform.position + new Vector3(xDelta, 0, 0);
+            
+            if (!ValidatePosition(newPos))
+            {
+              yield return null;  
+            }
+
+            transform.position = newPos;
+            yield return null;
+        }
+        
+        //yield return new WaitForSeconds(basicAttackData.active);
+
+        topBasicAttackHitbox.Deactivate();
+        botBasicAttackHitbox.Deactivate();
         state = isTop ? ControllerState.AttackTopWindDown : ControllerState.AttackBotWindDown;
         yield return new WaitForSeconds(basicAttackData.windDown);
         
@@ -213,6 +284,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HopProcedure(float moveVal)
     {
+        while (_currentStateFrameCounter < 15) 
+        {
+            yield return null;
+        }
+        
         state = ControllerState.Walk;
         var elapsedTime = 0f;
         var startPos = transform.position;

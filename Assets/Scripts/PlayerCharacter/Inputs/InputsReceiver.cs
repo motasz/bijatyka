@@ -24,6 +24,11 @@ public class InputsReceiver : MonoBehaviour
 
     private void SetMove(Vector2 newVal)
     {
+        if (newVal.y == -1)
+        {
+            Buffer.AddInput(InputType.DodgeDown);
+        }
+        
         move = newVal;
         Debug.Log(move);
         if (newVal.x == 0) return;
@@ -45,6 +50,4 @@ public class InputsReceiver : MonoBehaviour
     public void OnAttack(InputValue value) => SetAttack();
     
     public void OnDodgeUp(InputValue value) =>  SetDodgeUp();
-    
-    public void OnDodgeDown(InputValue value) =>  SetDodgeDown();
 }
