@@ -4,25 +4,36 @@ using UnityEngine;
 
 namespace PlayerCharacter
 {
+    [Serializable]
+    public enum DodgeState
+    {
+        Top,
+        Bot
+    }
     public class HitDetector: MonoBehaviour
     {
+        public DodgeState? dodgeState = null;
         private PlayerState _playerState;
+        private PlayerController _playerController;
 
         private void Awake()
         {
+            _playerController = GetComponent<PlayerController>();
             _playerState = GetComponentInParent<PlayerState>();
         }
 
-        private void OnTriggerEnter2D (Collider2D other)
+        private void OnTriggerEnter2D (Collider2D other) 
         {
-            var projectile = other.gameObject.GetComponent<Projectile>();
+            Debug.Log($"Collision at {dodgeState}");
+            var attack = other.gameObject.GetComponent<AttackController>();
 
-            if (projectile?.attackData == null) return;
+            if (attack == null || attack.damage == 0 || (attack.dodgeableBy != null && attack.dodgeableBy == dodgeState)) return;
 
             if (other.transform.parent.CompareTag(transform.tag)) return;
             
-            _playerState.ModifyHp(-projectile.attackData.damage);
-            Destroy(other.gameObject);
+            _playerController.GetHit(attack.staggerDamage);
+            attack.ActivateImpact();
+            _playerState.ModifyHp(-attack.damage);
         }
     }
 }

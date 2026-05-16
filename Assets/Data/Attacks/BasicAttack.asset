@@ -15,3 +15,7 @@ MonoBehaviour:
   damage: 5
   distance: 1.5
   duration: 0.4
+  windUp: 0.4
+  active: 0.1
+  windDown: 0.1
+  activeMovement: 0.5
