@@ -49,18 +49,27 @@ public class PlayerController : MonoBehaviour
     [Header("Attack")] 
     public AttackData basicAttackData;
     public float dodgeDuration = 0.1f;
-    public float attackMovement = 0.2f;
+    public int maxStagger = 11;
+    public int hitBlinkCount = 3;
+    public float blinkDuration = 0.1f;
+    public float stunDuration = 0.5f;
+    public float stunMovement = 0.5f;
 
     private Coroutine? moveCoroutine = null;
+    private Coroutine? hitCoroutine = null;
+    private int _currentStagger;
     
     [SerializeField]
     private ControllerState  state = ControllerState.Idle;
     
     private HitDetector _hitDetector;
     public bool isGrounded = false;
+    public bool isAfterDodge = false;
     private float verticalVelocity = 0f;
 
     private Animator _animator;
+    private SpriteRenderer _renderer;
+    private CharacterAudioPlayer _audioPlayer;
 
     private int _currentStateFrameCounter = 0;
     private ControllerState _previousStateBuffer;
@@ -69,6 +78,10 @@ public class PlayerController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _hitDetector = GetComponent<HitDetector>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _audioPlayer = GetComponent<CharacterAudioPlayer>();
+        
+        _currentStagger = maxStagger;
         _previousStateBuffer = state;
     }
 
@@ -84,9 +97,81 @@ public class PlayerController : MonoBehaviour
         UpdateAnimator();
     }
 
+    public void GetHit(int staggerVal)
+    {
+        _audioPlayer.PlayHit();
+        
+        if (hitCoroutine != null)
+        {
+            StopCoroutine(hitCoroutine);
+        }
+
+        hitCoroutine = StartCoroutine(HitProcedure());
+        
+        if (state != ControllerState.Hit) 
+        {
+            _currentStagger -= staggerVal;
+            
+            if (_currentStagger <= 0)
+            {
+                Stun();
+            }
+        }
+    }
+
+    void Stun()
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
+
+        moveCoroutine = StartCoroutine(StunProcedure());
+    }
+
+    IEnumerator HitProcedure()
+    {
+        for (var i = 0; hitBlinkCount > i; i++)
+        {
+            _renderer.enabled = false;
+            yield return new WaitForSeconds(blinkDuration);
+            _renderer.enabled = true;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+
+        _currentStagger = maxStagger;
+        hitCoroutine = null;
+    }
+
+    IEnumerator StunProcedure()
+    {
+        state = ControllerState.Hit;
+        var elapsedTime = 0f;
+        var startPos =  transform.position;
+        
+        while (elapsedTime < stunDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            var xDelta = Mathf.Lerp(0, stunMovement, elapsedTime / stunDuration);
+            
+            var newPos = startPos + new Vector3(xDelta, 0, 0) * (IsEnemyToTheRight() ? -1 : 1);
+
+            if (!ValidatePosition(newPos)) 
+            {
+                yield return null;
+            }
+            
+            transform.position = newPos;
+            yield return null;
+        }
+        
+        moveCoroutine = null;
+        BackToIdle();
+    }
+
     void UpdateFrameCounter()
     {
-        Debug.Log(_currentStateFrameCounter);
         if (_previousStateBuffer == state)
         {
             ++_currentStateFrameCounter;
@@ -190,7 +275,6 @@ public class PlayerController : MonoBehaviour
 
         state = dodgeState;
 
-        Debug.Log($"changing hit detector to {position}");
         _hitDetector.dodgeState = position;
         yield return new WaitForSeconds(dodgeDuration);
 
@@ -221,7 +305,7 @@ public class PlayerController : MonoBehaviour
             elapsedTime += Time.deltaTime;
             var xDelta = Mathf.Lerp(0, basicAttackData.activeMovement, elapsedTime / basicAttackData.active);
             
-            var newPos = transform.position + new Vector3(xDelta, 0, 0);
+            var newPos = startPos + new Vector3(xDelta, 0, 0) * (IsEnemyToTheRight() ? 1 : -1);
             
             if (!ValidatePosition(newPos))
             {
