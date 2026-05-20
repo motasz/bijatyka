@@ -18,8 +18,6 @@ namespace UI
 
         private void UpdateBar(int newHp)
         {
-            Debug.Log($"new hp: {newHp}, %: {newHp/100f}");
-            Debug.Log(image);
             image.fillAmount = (float)newHp/100f;
         }
     }

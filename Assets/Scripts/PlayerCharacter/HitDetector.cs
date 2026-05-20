@@ -24,12 +24,18 @@ namespace PlayerCharacter
 
         private void OnTriggerEnter2D (Collider2D other) 
         {
-            Debug.Log($"Collision at {dodgeState}");
             var attack = other.gameObject.GetComponent<AttackController>();
-
-            if (attack == null || attack.damage == 0 || (attack.dodgeableBy != null && attack.dodgeableBy == dodgeState)) return;
+            
+            if (attack == null || attack.damage == 0) return;
 
             if (other.transform.parent.CompareTag(transform.tag)) return;
+            
+            if (attack.dodgeableBy != null && attack.dodgeableBy == dodgeState)
+            {
+                Debug.Log($"Counter attack buff for {transform.tag}");
+                _playerController.CounterAttackBuff();
+                return;
+            }
             
             _playerController.GetHit(attack.staggerDamage);
             attack.ActivateImpact();

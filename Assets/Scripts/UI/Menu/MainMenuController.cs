@@ -36,7 +36,6 @@ namespace UI.Menu
             }
             else
             {
-               Debug.LogError("Screen " + defaultScreenName + " not found");
                return;
             }
             
@@ -45,7 +44,6 @@ namespace UI.Menu
 
         private void OnEnable()
         {
-            Debug.Log("Start");
             selectedButtonIndex = 0;
             SelectButton(selectedButtonIndex);
         }

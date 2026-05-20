@@ -55,8 +55,11 @@ public class PlayerController : MonoBehaviour
     public float stunDuration = 0.5f;
     public float stunMovement = 0.5f;
 
+    public float buffDuration = 0.3f;
+
     private Coroutine? moveCoroutine = null;
     private Coroutine? hitCoroutine = null;
+    private Coroutine? buffCoroutine = null;
     private int _currentStagger;
     
     [SerializeField]
@@ -64,7 +67,6 @@ public class PlayerController : MonoBehaviour
     
     private HitDetector _hitDetector;
     public bool isGrounded = false;
-    public bool isAfterDodge = false;
     private float verticalVelocity = 0f;
 
     private Animator _animator;
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     private int _currentStateFrameCounter = 0;
     private ControllerState _previousStateBuffer;
+
+    private bool _isCounterAttacking = false;
 
     private void Awake()
     {
@@ -125,8 +129,20 @@ public class PlayerController : MonoBehaviour
         {
             StopCoroutine(moveCoroutine);
         }
+        topBasicAttackHitbox.Deactivate();
+        botBasicAttackHitbox.Deactivate();
 
         moveCoroutine = StartCoroutine(StunProcedure());
+    }
+
+    public void CounterAttackBuff()
+    {
+        _isCounterAttacking = true;
+    }
+
+    IEnumerator BuffProcedure()
+    {
+        yield return new WaitForSeconds(buffDuration);
     }
 
     IEnumerator HitProcedure()
@@ -157,9 +173,9 @@ public class PlayerController : MonoBehaviour
             
             var newPos = startPos + new Vector3(xDelta, 0, 0) * (IsEnemyToTheRight() ? -1 : 1);
 
-            if (!ValidatePosition(newPos)) 
+            if (!ValidatePosition(newPos))
             {
-                yield return null;
+                newPos = transform.position;
             }
             
             transform.position = newPos;
@@ -204,16 +220,21 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessBufferedInput()
     {
-        if (moveCoroutine != null || !isGrounded || state == ControllerState.Air) return;
-        
         var buffer = inputs.Buffer;
-        
         buffer.Update();
         
         var input = buffer.GetOldest();
 
         if (input == null) return;
 
+        if (ProcessCounter(input))
+        {
+            buffer.RemoveOldest();
+            return;
+        }
+        
+        if (moveCoroutine != null || !isGrounded || state == ControllerState.Air) return;
+        
         switch (input.Input)
         {
             case InputType.Move:
@@ -234,6 +255,18 @@ public class PlayerController : MonoBehaviour
         }
         
         buffer.RemoveOldest();
+    }
+
+    private bool ProcessCounter(BufferedInput input) 
+    {
+        if (input.Input != InputType.Attack || !_isCounterAttacking) return false;
+        
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        _hitDetector.dodgeState = null;
+        
+        Attack(true);
+        _isCounterAttacking = false;
+        return true;
     }
 
     private void HorizontalMove(Vector2 value)
@@ -257,11 +290,11 @@ public class PlayerController : MonoBehaviour
         verticalVelocity = jumpForce;
     }
 
-    private void Attack()
+    private void Attack(bool isBuffed = false)
     {
         var isTop = inputs.move.y >= 0;
-
-        moveCoroutine = StartCoroutine(StandardAttackProcedure(isTop));
+        
+        moveCoroutine = StartCoroutine(StandardAttackProcedure(isTop, isBuffed));
     }
 
     private void Dodge(DodgeState position)
@@ -281,21 +314,35 @@ public class PlayerController : MonoBehaviour
         _hitDetector.dodgeState = null;
 
         moveCoroutine = null;
+        _isCounterAttacking = false;
         BackToIdle();
     }
 
-    private IEnumerator StandardAttackProcedure(bool isTop)
+    private IEnumerator StandardAttackProcedure(bool isTop, bool isBuffed = false)
     {
-        state = isTop ? ControllerState.AttackTopWindUp : ControllerState.AttackBotWindUp;
-        yield return new WaitForSeconds(basicAttackData.windUp);
+        if (!isBuffed)
+        {
+            state = isTop ? ControllerState.AttackTopWindUp : ControllerState.AttackBotWindUp;
+            yield return new WaitForSeconds(basicAttackData.windUp);
+        }
 
         state = isTop ? ControllerState.AttackTopActive : ControllerState.AttackBotActive;
         
+        var damage = isBuffed ? basicAttackData.damage * 2 : basicAttackData.damage;
+        var staggerDamage = isBuffed ? basicAttackData.damage * 3 : basicAttackData.damage;
+        
         if (isTop)
         {
+            topBasicAttackHitbox.damage = damage;
+            topBasicAttackHitbox.staggerDamage = staggerDamage;
             topBasicAttackHitbox.Activate();
         }
-        else botBasicAttackHitbox.Activate();
+        else
+        {
+            botBasicAttackHitbox.damage = damage;
+            botBasicAttackHitbox.staggerDamage = staggerDamage;
+            botBasicAttackHitbox.Activate();
+        };
 
         var elapsedTime = 0f;
         var startPos = transform.position;
