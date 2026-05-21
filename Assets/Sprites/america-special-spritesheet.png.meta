@@ -134,8 +134,8 @@ TextureImporter:
       name: america-special-spritesheet_1
       rect:
         serializedVersion: 2
-        x: 271
-        y: 340
+        x: 291
+        y: 339
         width: 185
         height: 229
       alignment: 0
@@ -205,7 +205,7 @@ TextureImporter:
         width: 85
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

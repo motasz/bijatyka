@@ -239,6 +239,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 0
+  maxEnergy: 100
+  currentEnergy: 0
+  passiveGainEnergyValue: 5
+  passiveGainEnergyInterval: 1
 --- !u!114 &5959111684881699373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +484,7 @@ MonoBehaviour:
   staggerDamage: 5
   dodgeableBy: 0
   impact: {fileID: 7805307406793459225}
+  activeOnAwake: 0
 --- !u!50 &6551965092508950606
 Rigidbody2D:
   serializedVersion: 5
@@ -604,6 +609,7 @@ MonoBehaviour:
   staggerDamage: 5
   dodgeableBy: 1
   impact: {fileID: 1619908098979113093}
+  activeOnAwake: 0
 --- !u!50 &1291225589383245868
 Rigidbody2D:
   serializedVersion: 5

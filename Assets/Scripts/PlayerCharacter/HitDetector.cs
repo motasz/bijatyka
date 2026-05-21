@@ -8,7 +8,8 @@ namespace PlayerCharacter
     public enum DodgeState
     {
         Top,
-        Bot
+        Bot,
+        None
     }
     public class HitDetector: MonoBehaviour
     {

@@ -213,6 +213,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   staggerDamage: 15
-  dodgeableBy: 0
+  dodgeableBy: 1
   impact: {fileID: 0}
   activeOnAwake: 1
