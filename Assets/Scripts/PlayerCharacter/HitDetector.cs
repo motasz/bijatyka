@@ -16,11 +16,13 @@ namespace PlayerCharacter
         public DodgeState? dodgeState = null;
         private PlayerState _playerState;
         private PlayerController _playerController;
+        private CharacterAudioPlayer _audioPlayer;
 
         private void Awake()
         {
             _playerController = GetComponent<PlayerController>();
             _playerState = GetComponentInParent<PlayerState>();
+            _audioPlayer = GetComponent<CharacterAudioPlayer>();
         }
 
         private void OnTriggerEnter2D (Collider2D other) 
@@ -35,11 +37,14 @@ namespace PlayerCharacter
             {
                 Debug.Log($"Counter attack buff for {transform.tag}");
                 _playerController.CounterAttackBuff();
+                _audioPlayer.PlayWhoosh();
+                _playerState.GainDodgeEnergy();
                 return;
             }
             
             _playerController.GetHit(attack.staggerDamage);
             attack.ActivateImpact();
+            attack.AwardEnergy();
             _playerState.ModifyHp(-attack.damage);
         }
     }

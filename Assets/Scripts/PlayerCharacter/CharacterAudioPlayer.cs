@@ -6,6 +6,7 @@ namespace PlayerCharacter
     public class CharacterAudioPlayer: MonoBehaviour
     {
         public AudioClip hit;
+        public AudioClip whoosh;
         
         private AudioSource _audioSource;
 
@@ -17,6 +18,11 @@ namespace PlayerCharacter
         public void PlayHit()
         {
             _audioSource.PlayOneShot(hit);
+        }
+
+        public void PlayWhoosh()
+        {
+            _audioSource.PlayOneShot(whoosh);
         }
     }
 }

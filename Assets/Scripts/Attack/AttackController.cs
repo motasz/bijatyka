@@ -11,7 +11,9 @@ namespace Attack
         public DodgeState dodgeableBy;
         public Impact impact;
         public bool activeOnAwake;
+        public bool awardsEnergy;
         
+        private PlayerState _parentPlayerState;
         private Collider2D _collider;
 
         private void Awake()
@@ -23,6 +25,8 @@ namespace Attack
             {
                 _collider.enabled = false;
             }
+
+            _parentPlayerState = GetComponentInParent<PlayerState>();
         }
 
         public void ActivateImpact()
@@ -40,6 +44,13 @@ namespace Attack
         public void Deactivate()
         {
             _collider.enabled = false;
+        }
+
+        public void AwardEnergy()
+        {
+            if (_parentPlayerState == null || !awardsEnergy) return;
+            
+            _parentPlayerState.GainAttackEnergy();
         }
 }
 }

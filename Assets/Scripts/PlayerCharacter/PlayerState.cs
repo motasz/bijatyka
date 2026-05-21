@@ -11,6 +11,8 @@ namespace PlayerCharacter
         public float currentEnergy;
         public float passiveGainEnergyValue;
         public float passiveGainEnergyInterval;
+        public float dodgeEnergyAward = 5;
+        public float attackEnergyAward = 5;
 
 
         private float _passiveGainTimer;
@@ -46,6 +48,21 @@ namespace PlayerCharacter
             currentEnergy += amount;
             currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
             OnEnergyChange?.Invoke(currentEnergy);
+        }
+
+        public void GainDodgeEnergy()
+        {
+            ModifyEnergy(dodgeEnergyAward);
+        }
+
+        public void GainAttackEnergy()
+        {
+            ModifyEnergy(attackEnergyAward);
+        }
+
+        public bool IsMaxEnergy()
+        {
+            return currentEnergy > 99.9;
         }
     }
 }

@@ -243,6 +243,8 @@ MonoBehaviour:
   currentEnergy: 0
   passiveGainEnergyValue: 5
   passiveGainEnergyInterval: 1
+  dodgeEnergyAward: 5
+  attackEnergyAward: 5
 --- !u!114 &5959111684881699373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: a771e671af342c247a8c52f0fce962af, type: 3}
+  whoosh: {fileID: 8300000, guid: efae37d961d16b748bef72556d295e92, type: 3}
 --- !u!1 &3943382301719591430
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +488,7 @@ MonoBehaviour:
   dodgeableBy: 0
   impact: {fileID: 7805307406793459225}
   activeOnAwake: 0
+  awardsEnergy: 1
 --- !u!50 &6551965092508950606
 Rigidbody2D:
   serializedVersion: 5
@@ -610,6 +614,7 @@ MonoBehaviour:
   dodgeableBy: 1
   impact: {fileID: 1619908098979113093}
   activeOnAwake: 0
+  awardsEnergy: 1
 --- !u!50 &1291225589383245868
 Rigidbody2D:
   serializedVersion: 5

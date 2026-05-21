@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _renderer;
     private CharacterAudioPlayer _audioPlayer;
+    private PlayerState _playerState;
 
     private int _currentStateFrameCounter = 0;
     private ControllerState _previousStateBuffer;
@@ -89,6 +90,7 @@ public class PlayerController : MonoBehaviour
         _hitDetector = GetComponent<HitDetector>();
         _renderer = GetComponent<SpriteRenderer>();
         _audioPlayer = GetComponent<CharacterAudioPlayer>();
+        _playerState = GetComponent<PlayerState>();
         
         _currentStagger = maxStagger;
         _previousStateBuffer = state;
@@ -161,11 +163,6 @@ public class PlayerController : MonoBehaviour
     public void CounterAttackBuff()
     {
         _isCounterAttacking = true;
-    }
-
-    IEnumerator BuffProcedure()
-    {
-        yield return new WaitForSeconds(buffDuration);
     }
 
     IEnumerator HitProcedure()
@@ -288,12 +285,17 @@ public class PlayerController : MonoBehaviour
 
     private void Special()
     {
+        if (!_playerState.IsMaxEnergy()) return;
+        
+        _playerState.ModifyEnergy(-100);
+        
         speciallAttack.StartSpecial(this);
     }
 
-    private bool ProcessCounter(BufferedInput input) 
+    private bool ProcessCounter(BufferedInput input)  
     {
-        if (input.Input != InputType.Attack || input.Input != InputType.LowAttack || !_isCounterAttacking) return false;
+        if (!_isCounterAttacking) return false;
+        if (input.Input != InputType.Attack && input.Input != InputType.LowAttack) return false;
         
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         _hitDetector.dodgeState = null;
