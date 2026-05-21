@@ -267,7 +267,10 @@ public class PlayerController : MonoBehaviour
                 Jump();
                 break;
             case InputType.Attack:
-                Attack();
+                Attack(DodgeState.Top);
+                break;
+            case InputType.LowAttack: 
+                Attack(DodgeState.Bot);
                 break;
             case InputType.DodgeUp:
                 Dodge(DodgeState.Top);
@@ -290,12 +293,12 @@ public class PlayerController : MonoBehaviour
 
     private bool ProcessCounter(BufferedInput input) 
     {
-        if (input.Input != InputType.Attack || !_isCounterAttacking) return false;
+        if (input.Input != InputType.Attack || input.Input != InputType.LowAttack || !_isCounterAttacking) return false;
         
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         _hitDetector.dodgeState = null;
         
-        Attack(true);
+        Attack(input.Input == InputType.LowAttack ? DodgeState.Bot : DodgeState.Top, true);
         _isCounterAttacking = false;
         return true;
     }
@@ -321,11 +324,10 @@ public class PlayerController : MonoBehaviour
         verticalVelocity = jumpForce;
     }
 
-    private void Attack(bool isBuffed = false)
+    private void Attack(DodgeState topOrDown, bool isBuffed = false)
     {
-        var isTop = inputs.move.y >= 0;
         
-        moveCoroutine = StartCoroutine(StandardAttackProcedure(isTop, isBuffed));
+        moveCoroutine = StartCoroutine(StandardAttackProcedure(topOrDown == DodgeState.Top, isBuffed));
     }
 
     private void Dodge(DodgeState position)

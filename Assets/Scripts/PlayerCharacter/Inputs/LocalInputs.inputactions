@@ -97,15 +97,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DodgeUp",
-                    "type": "Button",
-                    "id": "99c8a103-9a8d-4bee-af08-57ec68fce46e",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Special",
                     "type": "Button",
                     "id": "f2c05a2c-34e8-40ce-bab3-ee441ccb6c4f",
@@ -350,7 +341,7 @@
                 {
                     "name": "",
                     "id": "4b9867d2-4e2a-4a0b-bfc5-ea6e586daba4",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard1",
@@ -529,30 +520,19 @@
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard1",
                     "action": "LowAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ff181c03-ea3a-4bdc-9930-53f80bed35cf",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard1",
-                    "action": "DodgeUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "885010e0-8fd1-469b-82b3-3ac6d317208d",
+                    "id": "84526870-722c-42b9-99f8-32471fffa2b5",
                     "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard2",
-                    "action": "DodgeUp",
+                    "action": "LowAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
