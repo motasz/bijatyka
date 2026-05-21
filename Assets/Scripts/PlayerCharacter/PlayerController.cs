@@ -4,6 +4,7 @@ using Attack;
 using Data;
 using PlayerCharacter;
 using PlayerCharacter.Inputs;
+using PlayerCharacter.Special;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 using Math = System.Math;
@@ -22,6 +23,9 @@ public enum ControllerState
     AttackBotWindDown = 9,
     DodgeTop = 10,
     DodgeBot = 11,
+    SpecialWindUp = 12,
+    SpecialActive = 13,
+    SpecialWindDown = 14
 }
 
 public class PlayerController : MonoBehaviour
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public PlayerController enemy;
     public AttackController topBasicAttackHitbox;
     public AttackController botBasicAttackHitbox;
+    public SpeciallAttack speciallAttack;
 
     [Header("Boundaries")] 
     public float horizontalClamp = 8f;
@@ -99,6 +104,24 @@ public class PlayerController : MonoBehaviour
         ClampHorizontalPosition();
         RotatePlayer();
         UpdateAnimator();
+    }
+
+    public void SetMoveRoutine(IEnumerator coroutine)
+    {
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        
+        moveCoroutine = StartCoroutine(coroutine);
+    }
+
+    public void ResetMoveRoutine()
+    {
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        moveCoroutine = null;
+    }
+
+    public void SetState(ControllerState newState)
+    {
+        state = newState;
     }
 
     public void GetHit(int staggerVal)
@@ -213,7 +236,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetInteger("state", animationState);
     }
 
-    private void BackToIdle()
+    public void BackToIdle()
     {
         state = ControllerState.Idle;
     }
@@ -252,9 +275,17 @@ public class PlayerController : MonoBehaviour
             case InputType.DodgeDown:
                 Dodge(DodgeState.Bot);
                 break;
+            case InputType.Special:
+                Special();
+                break;
         }
         
         buffer.RemoveOldest();
+    }
+
+    private void Special()
+    {
+        speciallAttack.StartSpecial(this);
     }
 
     private bool ProcessCounter(BufferedInput input) 

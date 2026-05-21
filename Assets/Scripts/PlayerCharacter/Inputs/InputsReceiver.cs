@@ -9,7 +9,8 @@ public enum InputType
     Move,
     Attack,
     DodgeUp,
-    DodgeDown
+    DodgeDown,
+    Special
 }
 public class InputsReceiver : MonoBehaviour
 {
@@ -67,11 +68,15 @@ public class InputsReceiver : MonoBehaviour
     
     private void  SetDodgeDown() => Buffer.AddInput(InputType.DodgeDown);
     
+    private void SetSpecial() => Buffer.AddInput(InputType.Special);
+    
     public void OnMove(InputValue value) => SetMove(value.Get<Vector2>());
     
     public void OnJump(InputValue value) => SetJump();
 
     public void OnAttack(InputValue value) => SetAttack();
+
+    public void OnSpecial(InputValue value) => SetSpecial();
     
     public void OnDodgeUp(InputValue value) =>  SetDodgeUp();
 }

@@ -192,6 +192,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   topBasicAttackHitbox: {fileID: 1379499592483296742}
   botBasicAttackHitbox: {fileID: 7603910041473742930}
+  speciallAttack: {fileID: 11400000, guid: 6b843fdf33171184498bd4afebdebb4e, type: 2}
   horizontalClamp: 8
   verticalClamp: -2.5
   minimalPlayerDistance: 1.4
@@ -207,9 +208,9 @@ MonoBehaviour:
   blinkDuration: 0.1
   stunDuration: 1
   stunMovement: 3
+  buffDuration: 0.3
   state: 0
   isGrounded: 0
-  isAfterDodge: 0
 --- !u!114 &2325418018889177129
 MonoBehaviour:
   m_ObjectHideFlags: 0

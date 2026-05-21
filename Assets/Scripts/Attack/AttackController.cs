@@ -10,6 +10,7 @@ namespace Attack
         public int staggerDamage = 5;
         public DodgeState dodgeableBy;
         public Impact impact;
+        public bool activeOnAwake;
         
         private Collider2D _collider;
 
@@ -17,7 +18,11 @@ namespace Attack
         {
             _collider = GetComponent<Collider2D>();
             _collider.isTrigger = true;
-            _collider.enabled = false;
+            
+            if (!activeOnAwake)
+            {
+                _collider.enabled = false;
+            }
         }
 
         public void ActivateImpact()
