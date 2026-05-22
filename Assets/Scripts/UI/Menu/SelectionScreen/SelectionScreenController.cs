@@ -47,11 +47,12 @@ namespace UI.Menu
 
         private void Start()
         {
-            foreach (var characterData in characters.characters)
+            foreach (var characterData in characters.characters) 
             {
                 for (int i = 0; i < 3; i++)
                 {
                     var panel = Instantiate(panelPrefab,  charactersRow.transform);
+                    panel.GetComponent<Image>().sprite = characterData.portrait;
                     panel.GetComponent<Button>().onClick.AddListener(() => OnSelect(characterData));
                     if (i == 0)
                     {

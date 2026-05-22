@@ -1,5 +1,6 @@
 ﻿using System;
 using Attack;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace PlayerCharacter

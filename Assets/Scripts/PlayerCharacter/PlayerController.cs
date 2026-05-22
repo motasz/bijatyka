@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     private ControllerState _previousStateBuffer;
 
     private bool _isCounterAttacking = false;
+    private bool _isDisabled = false;
 
     private void Awake()
     {
@@ -124,6 +125,19 @@ public class PlayerController : MonoBehaviour
     public void SetState(ControllerState newState)
     {
         state = newState;
+    }
+
+    public void Disable()
+    {
+        _isDisabled = true;
+    }
+
+    private void Kill()
+    {
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        if (hitCoroutine != null) StopCoroutine(hitCoroutine);
+        
+        Destroy(gameObject);
     }
 
     public void GetHit(int staggerVal)
@@ -177,6 +191,8 @@ public class PlayerController : MonoBehaviour
 
         _currentStagger = maxStagger;
         hitCoroutine = null;
+        
+        if (_playerState.IsDead()) Kill();
     }
 
     IEnumerator StunProcedure()
@@ -240,6 +256,7 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessBufferedInput()
     {
+        if (_isDisabled) return;
         var buffer = inputs.Buffer;
         buffer.Update();
         
@@ -442,6 +459,8 @@ public class PlayerController : MonoBehaviour
 
     private void ClampHorizontalPosition()
     {
+        if (!enemy) return;
+        
         var boundaries = GetBoundaries();
         
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, boundaries.left, boundaries.right),
@@ -481,6 +500,8 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer()
     {
+        if (!enemy) return;
+        
         var rotateY = transform.rotation.eulerAngles.y;
 
         var desiredRotationY = IsEnemyToTheRight() ? 0f : 180f;

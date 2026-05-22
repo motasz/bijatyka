@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace PlayerCharacter
@@ -41,6 +42,8 @@ namespace PlayerCharacter
             currentHp = Mathf.Clamp(currentHp, 0, maxHp);
             
             OnHpChange?.Invoke(currentHp);
+            
+            if (IsDead()) GameController.Instance.EndGame(gameObject.tag);
         }
 
         public void ModifyEnergy(float amount)
@@ -63,6 +66,11 @@ namespace PlayerCharacter
         public bool IsMaxEnergy()
         {
             return currentEnergy > 99.9;
+        }
+
+        public bool IsDead()
+        {
+            return currentHp <= 0;
         }
     }
 }

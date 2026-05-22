@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c9c721cae954f6cb86f0ee5d04c2c17, type: 3}
-  m_Name: AllCharacters
+  m_Script: {fileID: 11500000, guid: c8c8bdc794af47eabb66459c140a85e8, type: 3}
+  m_Name: America
   m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 11400000, guid: 0c6e31b56aa02cb42a1ca140f907cee5, type: 2}
+  name: Cpt. America
+  sprite: {fileID: 0}
+  portrait: {fileID: 1442013557064421180, guid: 58e255a6945994640a3dabbc33c882e9, type: 3}
