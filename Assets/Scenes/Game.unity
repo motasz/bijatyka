@@ -2275,18 +2275,18 @@ PrefabInstance:
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6369153234045578807, guid: c382dfc427189094692da3090a7893f1, type: 3}
+      objectReference: {fileID: 6369153234045578807, guid: aed1b00d69b07d042bc18cc199cbd2f8, type: 3}
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.91477764
       objectReference: {fileID: 0}
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.2783019
       objectReference: {fileID: 0}
     - target: {fileID: 2344565522179595945, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_DefaultControlScheme
@@ -2295,7 +2295,7 @@ PrefabInstance:
     - target: {fileID: 5997668861599405865, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 93277be34781c604c938c5448fcda31d, type: 2}
+      objectReference: {fileID: 9100000, guid: 8581a81e3fa5e864b8aa2c389072216f, type: 2}
     - target: {fileID: 7118611438677627412, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.842189
