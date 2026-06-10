@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 0}
+  mediumHpColor: {r: 0.9519104, g: 1, b: 0, a: 1}
+  highHpColor: {r: 0.3019608, g: 0.9254902, b: 0.33333334, a: 1}
+  lowHpColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8173224291424499809
 GameObject:
   m_ObjectHideFlags: 0

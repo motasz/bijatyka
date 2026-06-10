@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5808142712344536690}
   - component: {fileID: 3740668270220986296}
   - component: {fileID: 871011905807820098}
+  - component: {fileID: 82892050072270619}
   m_Layer: 5
   m_Name: CharacterPanel
   m_TagString: Untagged
@@ -131,5 +132,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cf728059f3b49e3999ea28000f91484, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &82892050072270619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424198177399820877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92f5efb05fe4cf0a0874165c8475ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

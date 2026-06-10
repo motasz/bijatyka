@@ -73,6 +73,7 @@ namespace UI.Menu
 
         private void OnSelect(CharacterData characterData)
         {
+            UISoundPlayer.Instance.PlaySelect();
             if (currentTurn == Turn.Player2 && playerSelection.characters[(int)Turn.Player2] != null)
             {
                 return;
@@ -88,12 +89,14 @@ namespace UI.Menu
 
         public void GoBack()
         {
+            UISoundPlayer.Instance.PlaySelect();
             mainMenuCanva.SetActive(true);
             gameObject.SetActive(false);
         }
 
         public void StartGame()
         {
+            UISoundPlayer.Instance.PlaySelect();
             SceneManager.LoadScene("Game");
         }
     }

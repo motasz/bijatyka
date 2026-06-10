@@ -71,17 +71,20 @@ namespace UI.Menu
             selectedButtonIndex = index;
             var button = currentScreen.buttons[selectedButtonIndex];
             
+            UISoundPlayer.Instance.PlayNavigation();
             button.Select();
         }
 
         public void StartGame()
         {
+            UISoundPlayer.Instance.PlaySelect();
             selectionScreenCanvas.SetActive(true);
             gameObject.SetActive(false);
         }
 
         public void Quit()
         {
+            UISoundPlayer.Instance.PlaySelect();
             #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
             #else
