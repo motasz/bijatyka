@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Data;
 using UnityEngine;
 
 namespace PlayerCharacter.Special
 {
-    [CreateAssetMenu(menuName = "Data/America-Special", fileName = "America-Special")]
+    [CreateAssetMenu(menuName = "Data/Specials/America", fileName = "America-Special")]
     public class AmericaSpecial: SpeciallAttack
     {
         public GameObject shotPrefab;
@@ -41,6 +42,11 @@ namespace PlayerCharacter.Special
             
             playerController.BackToIdle();
             playerController.ResetMoveRoutine();
+        }
+
+        public override bool Validate(PlayerController playerController)
+        {
+            return playerController.isGrounded;
         }
     }
 }

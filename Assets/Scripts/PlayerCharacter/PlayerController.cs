@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public PlayerController enemy;
     public AttackController topBasicAttackHitbox;
     public AttackController botBasicAttackHitbox;
-    public SpeciallAttack speciallAttack;
+    public PlayerSelection playerSelection;
 
     [Header("Boundaries")] 
     public float horizontalClamp = 8f;
@@ -46,10 +46,12 @@ public class PlayerController : MonoBehaviour
     public float hopTime = 0.2f;
     public float hopDistance = 1f;
     public float midAirSpeed = 1f;
+    public bool horizontalClampEnabled = true;
 
     [Header("Vertical movement")] 
     public float gravityForce = -20f;
     public float jumpForce = 10f;
+    public bool gravityEnabled = true;
 
     [Header("Attack")] 
     public AttackData basicAttackData;
@@ -72,9 +74,10 @@ public class PlayerController : MonoBehaviour
     
     private HitDetector _hitDetector;
     public bool isGrounded = false;
-    private float verticalVelocity = 0f;
+    public float verticalVelocity = 0f;
 
     private Animator _animator;
+    private SpeciallAttack _specialAttack;
     private SpriteRenderer _renderer;
     private CharacterAudioPlayer _audioPlayer;
     private PlayerState _playerState;
@@ -83,7 +86,7 @@ public class PlayerController : MonoBehaviour
     private ControllerState _previousStateBuffer;
 
     private bool _isCounterAttacking = false;
-    private bool _isDisabled = false;
+    private bool _isMovementDisabled = false;
 
     private void Awake()
     {
@@ -95,6 +98,8 @@ public class PlayerController : MonoBehaviour
         
         _currentStagger = maxStagger;
         _previousStateBuffer = state;
+        
+        InitializeSpecificCharacter();
     }
 
     void Update()
@@ -129,7 +134,12 @@ public class PlayerController : MonoBehaviour
 
     public void Disable()
     {
-        _isDisabled = true;
+        _isMovementDisabled = true;
+    }
+
+    public void Enable()
+    {
+        _isMovementDisabled = false;
     }
 
     private void Kill()
@@ -256,7 +266,7 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessBufferedInput()
     {
-        if (_isDisabled) return;
+        if (_isMovementDisabled) return;
         var buffer = inputs.Buffer;
         buffer.Update();
         
@@ -270,7 +280,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        if (moveCoroutine != null || !isGrounded || state == ControllerState.Air) return;
+        if (moveCoroutine != null || (!isGrounded && input.Input != InputType.Special)) return;
         
         switch (input.Input)
         {
@@ -302,11 +312,11 @@ public class PlayerController : MonoBehaviour
 
     private void Special()
     {
-        if (!_playerState.IsMaxEnergy()) return;
+        if (!_playerState.IsMaxEnergy() || !_specialAttack.Validate(this)) return;
         
         _playerState.ModifyEnergy(-100);
         
-        speciallAttack.StartSpecial(this);
+        _specialAttack.StartSpecial(this);
     }
 
     private bool ProcessCounter(BufferedInput input)  
@@ -334,7 +344,7 @@ public class PlayerController : MonoBehaviour
     // gdy jestesmy w powietrzu nie chcemy uzywac input buffera - ruch jest ciagly
     private void AerialMove()
     {
-        if (isGrounded) return;
+        if (isGrounded || _isMovementDisabled) return;
         transform.position += new Vector3(midAirSpeed * Time.deltaTime * inputs.move.x, 0, 0);
     }
 
@@ -446,10 +456,11 @@ public class PlayerController : MonoBehaviour
             verticalVelocity = 0f;
             return;
         }
+        isGrounded = false;
         
+        if (!gravityEnabled) return;
         verticalVelocity += gravityForce * Time.deltaTime;
         state = ControllerState.Air;
-        isGrounded = false;
     }
 
     private void VerticalMove()
@@ -459,7 +470,7 @@ public class PlayerController : MonoBehaviour
 
     private void ClampHorizontalPosition()
     {
-        if (!enemy) return;
+        if (!enemy || !horizontalClampEnabled) return;
         
         var boundaries = GetBoundaries();
         
@@ -527,5 +538,13 @@ public class PlayerController : MonoBehaviour
     {
         var boundaries = GetBoundaries();
         return boundaries.left < pos.x && pos.x < boundaries.right; 
+    }
+
+    private void InitializeSpecificCharacter()
+    {
+        var characterData = playerSelection.GetCharacterDataOfPlayer(gameObject.tag);
+
+        _animator.runtimeAnimatorController = characterData.animatorController;
+        _specialAttack = characterData.special;
     }
 }

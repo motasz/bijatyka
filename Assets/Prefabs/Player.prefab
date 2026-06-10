@@ -192,7 +192,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   topBasicAttackHitbox: {fileID: 1379499592483296742}
   botBasicAttackHitbox: {fileID: 7603910041473742930}
-  speciallAttack: {fileID: 11400000, guid: 6b843fdf33171184498bd4afebdebb4e, type: 2}
+  playerSelection: {fileID: 11400000, guid: 48e9390c20702e642806250cc26dacb0, type: 2}
   horizontalClamp: 8
   verticalClamp: -2.5
   minimalPlayerDistance: 1.4

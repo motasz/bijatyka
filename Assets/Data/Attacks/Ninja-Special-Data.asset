@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c9c721cae954f6cb86f0ee5d04c2c17, type: 3}
-  m_Name: AllCharacters
+  m_Script: {fileID: 11500000, guid: 4b756b034d9b49a1a358d59ec3da078b, type: 3}
+  m_Name: Ninja-Special-Data
   m_EditorClassIdentifier: 
-  characters:
-  - {fileID: 11400000, guid: 0c6e31b56aa02cb42a1ca140f907cee5, type: 2}
-  - {fileID: 11400000, guid: 78e668b87a46d0b409bbecdd1f84bed2, type: 2}
+  damage: 0
+  distance: 1
+  duration: 0
+  windUp: 1
+  active: 1
+  windDown: 1
+  activeMovement: 0

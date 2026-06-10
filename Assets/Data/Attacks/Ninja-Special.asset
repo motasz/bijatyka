@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4f3df0aff940bca8e35aa5c837fd68, type: 3}
+  m_Name: Ninja-Special
+  m_EditorClassIdentifier: 
+  attackData: {fileID: 11400000, guid: d8d3a12c08285834e99be4a602b6c3e6, type: 2}
+  aoePrefab: {fileID: 1490034925176672487, guid: 80dabf908d11f4849870b44508239032, type: 3}
+  auraPrefab: {fileID: 648443739028931503, guid: be53733b44207fd4fa6f1e55ffb86353, type: 3}
+  impactPrefab: {fileID: 2247679433138432165, guid: 8a544fdd03b66ab4d8c43ce4fea69b02, type: 3}
+  windUpSfx: {fileID: 8300000, guid: 0622f6cb7449cf241a7029223097c7a0, type: 3}
+  impactSfx: {fileID: 8300000, guid: 7053f9bc155015044b9f63f1a40e5933, type: 3}

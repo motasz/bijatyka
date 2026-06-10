@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8c8bdc794af47eabb66459c140a85e8, type: 3}
-  m_Name: America
+  m_Name: Ninja
   m_EditorClassIdentifier: 
-  name: Cpt. America
+  name: Ninja
   animatorController: {fileID: 9100000, guid: 8581a81e3fa5e864b8aa2c389072216f, type: 2}
-  portrait: {fileID: 1442013557064421180, guid: 58e255a6945994640a3dabbc33c882e9, type: 3}
-  special: {fileID: 11400000, guid: 6b843fdf33171184498bd4afebdebb4e, type: 2}
+  portrait: {fileID: 5766581543358236769, guid: 7377ad3120e616e4aaf90c466a0f350d, type: 3}
+  special: {fileID: 11400000, guid: 6a4b5816345d05d44b757432458045ce, type: 2}

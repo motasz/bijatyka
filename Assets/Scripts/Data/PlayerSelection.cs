@@ -27,5 +27,12 @@ namespace Data
             OnCharacterSelected?.Invoke(null, Turn.Player2);
             characters = new CharacterData[2];
         }
+
+        public CharacterData GetCharacterDataOfPlayer(string playerTag)
+        {
+            if (playerTag == "Player1") return characters[0];
+
+            return characters[1];
+        }
     }
 }
