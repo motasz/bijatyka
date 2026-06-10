@@ -1,3 +1,17 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 73ea5feab11745149d7bedfcd9469a69
-timeCreated: 1775763179
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - characters: {instanceID: 0}
+  - charactersRow: {instanceID: 0}
+  - panelPrefab: {instanceID: 0}
+  - playerSelection: {fileID: 11400000, guid: 48e9390c20702e642806250cc26dacb0, type: 2}
+  - startButton: {instanceID: 0}
+  - mainMenuCanva: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

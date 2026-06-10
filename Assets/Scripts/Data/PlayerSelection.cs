@@ -28,6 +28,12 @@ namespace Data
             characters = new CharacterData[2];
         }
 
+        public void CleanUp()
+        {
+            OnCharacterSelected = null;
+            characters = new CharacterData[2];
+        }
+
         public CharacterData GetCharacterDataOfPlayer(string playerTag)
         {
             if (playerTag == "Player1") return characters[0];

@@ -1,4 +1,6 @@
 ﻿using System;
+using Data;
+using UI;
 using UI.Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +13,7 @@ namespace DefaultNamespace
         public PlayerController player1;
         public PlayerController player2;
         public EndGameScreen endGameScreen;
+        public PlayerSelection playerSelection;
 
         public static GameController Instance;
 
@@ -30,15 +33,19 @@ namespace DefaultNamespace
         public void GoToMenu()
         {
             SceneManager.LoadScene("Menu");
+            UISoundPlayer.Instance.PlaySelect();
+            playerSelection.CleanUp();
         }
 
         public void PlayAgain()
         {
             SceneManager.LoadScene("Game");
+            UISoundPlayer.Instance.PlaySelect();
         }
         
         public void Quit()
         {
+            UISoundPlayer.Instance.PlaySelect();
             #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
             #else
