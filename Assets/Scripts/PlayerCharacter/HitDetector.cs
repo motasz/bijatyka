@@ -46,7 +46,11 @@ namespace PlayerCharacter
             _playerController.GetHit(attack.staggerDamage);
             attack.ActivateImpact();
             attack.AwardEnergy();
-            _playerState.ModifyHp(-attack.damage);
+            
+            if (!_playerController.isInvincible)
+            {
+                _playerState.ModifyHp(-attack.damage);
+            }
         }
     }
 }

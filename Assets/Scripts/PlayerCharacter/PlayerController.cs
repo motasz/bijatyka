@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public float hopDistance = 1f;
     public float midAirSpeed = 1f;
     public bool horizontalClampEnabled = true;
+    public bool canTurn = true;
 
     [Header("Vertical movement")] 
     public float gravityForce = -20f;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
     public float blinkDuration = 0.1f;
     public float stunDuration = 0.5f;
     public float stunMovement = 0.5f;
+    public bool isInvincible = false;
 
     public float buffDuration = 0.3f;
 
@@ -88,6 +90,8 @@ public class PlayerController : MonoBehaviour
     private bool _isCounterAttacking = false;
     private bool _isMovementDisabled = false;
 
+    public Action OnHit;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -112,6 +116,16 @@ public class PlayerController : MonoBehaviour
         ClampHorizontalPosition();
         RotatePlayer();
         UpdateAnimator();
+    }
+
+    public void MakeVisible()
+    {
+        _renderer.enabled = true;
+    }
+
+    public void MakeInvisible()
+    {
+        _renderer.enabled = false;
     }
 
     public void SetMoveRoutine(IEnumerator coroutine)
@@ -152,6 +166,9 @@ public class PlayerController : MonoBehaviour
 
     public void GetHit(int staggerVal)
     {
+        OnHit?.Invoke();
+        if (isInvincible) return;
+        
         _audioPlayer.PlayHit();
         
         if (hitCoroutine != null)
@@ -511,7 +528,7 @@ public class PlayerController : MonoBehaviour
 
     private void RotatePlayer()
     {
-        if (!enemy) return;
+        if (!enemy || !canTurn) return;
         
         var rotateY = transform.rotation.eulerAngles.y;
 
@@ -522,7 +539,7 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, desiredRotationY, 0);
     }
     
-    private bool IsEnemyToTheRight() => enemy.transform.position.x > transform.position.x;
+    public bool IsEnemyToTheRight() => enemy.transform.position.x > transform.position.x;
     
     private float GetEffectivePlayerBoundary() => enemy.transform.position.x + (IsEnemyToTheRight() ? -minimalPlayerDistance : minimalPlayerDistance);
 

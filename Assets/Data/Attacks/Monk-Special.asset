@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274b76426f9d48ceacbc28d0d78fc27e, type: 3}
+  m_Name: Monk-Special
+  m_EditorClassIdentifier: 
+  specialAttackData: {fileID: 11400000, guid: fed7fbc6325fad24d88dd13112f34c27, type: 2}
+  impactPrefab: {fileID: 7158325850740275872, guid: 77cace29cc38b79468295cb165782f6a, type: 3}
+  miragePrefab: {fileID: 7962628477544550836, guid: 83f92fd10b1a30041a8e2140602363d0, type: 3}
+  teleportOffset: 3
+  blinkDelay: 0.6
+  shadowlandPosition: {x: 0, y: 100, z: 0}
