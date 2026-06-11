@@ -71,7 +71,11 @@ namespace UI.Menu
             selectedButtonIndex = index;
             var button = currentScreen.buttons[selectedButtonIndex];
             
-            UISoundPlayer.Instance.PlayNavigation();
+            if (UISoundPlayer.Instance != null) 
+            {
+                UISoundPlayer.Instance.PlayNavigation();
+            }
+            
             button.Select();
         }
 

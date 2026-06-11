@@ -2475,11 +2475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Color.g
-      value: 0.91477764
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2092086477789937739, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_Color.r
-      value: 0.2783019
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2344565522179595945, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_DefaultControlScheme
@@ -3025,6 +3025,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5997668861599405865, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8581a81e3fa5e864b8aa2c389072216f, type: 2}
     - target: {fileID: 7118611438677627412, guid: 4f674f5511e19aa4aad28bdc7e729a52, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.54

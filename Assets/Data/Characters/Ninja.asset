@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ninja
   m_EditorClassIdentifier: 
   name: Ninja
-  animatorController: {fileID: 9100000, guid: 8581a81e3fa5e864b8aa2c389072216f, type: 2}
-  portrait: {fileID: 5766581543358236769, guid: 7377ad3120e616e4aaf90c466a0f350d, type: 3}
+  animatorController: {fileID: 9100000, guid: 92cc2e5247b4cdb46a62de3360db83b4, type: 2}
+  portrait: {fileID: 21300000, guid: f5283ff7f7790f049af3c7f2fd039931, type: 3}
   special: {fileID: 11400000, guid: 6a4b5816345d05d44b757432458045ce, type: 2}

@@ -9,6 +9,8 @@ namespace UI.Menu.SelectionScreen
     {
         private Selectable _button;
         private ColorBlock _colors;
+        public Color player1Color;
+        public Color player2Color;
 
         private void Start()
         {
@@ -21,9 +23,9 @@ namespace UI.Menu.SelectionScreen
         private void OnTurnChange(Turn turn)
         {
             _colors.selectedColor = SelectionScreenController.Instance.currentTurn == Turn.Player1
-                ? Color.red
-                : Color.blue;
+                ? player1Color
+                : player2Color;
             _button.colors = _colors;
         }
-}
+    }
 }
