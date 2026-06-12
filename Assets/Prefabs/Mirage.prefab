@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2999905795366568127}
   - component: {fileID: 6133758520390449542}
   - component: {fileID: 8543477414208131364}
-  - component: {fileID: 5342493149458833469}
   - component: {fileID: 5091903001256460493}
   m_Layer: 0
   m_Name: Mirage
@@ -112,22 +111,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &5342493149458833469
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7962628477544550836}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!114 &5091903001256460493
 MonoBehaviour:
   m_ObjectHideFlags: 0

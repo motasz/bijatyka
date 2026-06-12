@@ -38,8 +38,8 @@ namespace PlayerCharacter.Special
             if (!wasHit)
             {
                 playerController.BackToIdle();
-                playerController.isInvincible = false;
                 playerController.ResetMoveRoutine();
+                yield return null;
             }
             
             SpawnMirage(playerController);
@@ -53,6 +53,7 @@ namespace PlayerCharacter.Special
             yield return null;
             playerController.canTurn = false;
             var impact = Instantiate(impactPrefab, playerController.transform.position, playerController.transform.rotation, playerController.transform); 
+            impact.tag = playerController.gameObject.tag;
             
             yield return new WaitForSeconds(specialAttackData.active);
             Destroy(impact); 

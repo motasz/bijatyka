@@ -135,9 +135,17 @@ public class PlayerController : MonoBehaviour
         moveCoroutine = StartCoroutine(coroutine);
     }
 
+    private void ResetCrucialAttributes()
+    {
+        canTurn = true;
+        isInvincible = false;
+        gravityEnabled = true;
+    }
+
     public void ResetMoveRoutine()
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        ResetCrucialAttributes();
         moveCoroutine = null;
     }
 
@@ -191,10 +199,7 @@ public class PlayerController : MonoBehaviour
 
     void Stun()
     {
-        if (moveCoroutine != null)
-        {
-            StopCoroutine(moveCoroutine);
-        }
+        ResetMoveRoutine();
         topBasicAttackHitbox.Deactivate();
         botBasicAttackHitbox.Deactivate();
 
@@ -341,7 +346,7 @@ public class PlayerController : MonoBehaviour
         if (!_isCounterAttacking) return false;
         if (input.Input != InputType.Attack && input.Input != InputType.LowAttack) return false;
         
-        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        ResetMoveRoutine();
         _hitDetector.dodgeState = null;
         
         Attack(input.Input == InputType.LowAttack ? DodgeState.Bot : DodgeState.Top, true);

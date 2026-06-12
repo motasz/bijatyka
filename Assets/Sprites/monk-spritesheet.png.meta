@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: 0af4c28d11314aa47960f1a341af4742
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2527803847014473163
+    second: monk-spritesheet_0
+  - first:
+      213: -2725422367237351665
+    second: monk-spritesheet_1
+  - first:
+      213: 6652780042539414162
+    second: monk-spritesheet_2
+  - first:
+      213: 2317235810628766812
+    second: monk-spritesheet_3
+  - first:
+      213: -6072110648423440975
+    second: monk-spritesheet_4
+  - first:
+      213: -1848317282479418999
+    second: monk-spritesheet_5
+  - first:
+      213: -2609165878727506117
+    second: monk-spritesheet_6
+  - first:
+      213: -6366580742106303702
+    second: monk-spritesheet_7
+  - first:
+      213: -3997051127862535270
+    second: monk-spritesheet_8
+  - first:
+      213: 2425947692256653871
+    second: monk-spritesheet_9
+  - first:
+      213: -6063129317385316935
+    second: monk-spritesheet_10
+  - first:
+      213: 3742240602677809759
+    second: monk-spritesheet_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: monk-idle_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 926
+        width: 185
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53226d44bcf6becd0800000000000000
+      internalID: -2527803847014473163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-idle_1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 925
+        width: 185
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07d9e10cca5d2ad0800000000000000
+      internalID: -2725422367237351665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-idle_2
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 926
+        width: 185
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 292be54633c635c50800000000000000
+      internalID: 6652780042539414162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-punch-wind-up
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 654
+        width: 194
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5c875941b9782020800000000000000
+      internalID: 2317235810628766812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-punch-active
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 644
+        width: 186
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bd9ad369878bbba0800000000000000
+      internalID: -6072110648423440975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-punch-wind-down
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 648
+        width: 199
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 981599179357956e0800000000000000
+      internalID: -1848317282479418999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-kick-wind-up
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 374
+        width: 185
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37806e05716acbd0800000000000000
+      internalID: -2609165878727506117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-kick-active
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 369
+        width: 257
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2339e0fb8c55a7a0800000000000000
+      internalID: -6366580742106303702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-kick-wind-down
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 379
+        width: 226
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9bddae2d2f9788c0800000000000000
+      internalID: -3997051127862535270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-dodge
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 106
+        width: 205
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f22f2a8a292baa120800000000000000
+      internalID: 2425947692256653871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-air
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 105
+        width: 185
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5ddf972007bdba0800000000000000
+      internalID: -6063129317385316935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monk-hit
+      rect:
+        serializedVersion: 2
+        x: 616
+        y: 102
+        width: 185
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5297aa300c1fe330800000000000000
+      internalID: 3742240602677809759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 19bba4cf261c009428d5908602c7f90d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      monk-air: -6063129317385316935
+      monk-dodge: 2425947692256653871
+      monk-hit: 3742240602677809759
+      monk-idle_0: -2527803847014473163
+      monk-idle_1: -2725422367237351665
+      monk-idle_2: 6652780042539414162
+      monk-kick-active: -6366580742106303702
+      monk-kick-wind-down: -3997051127862535270
+      monk-kick-wind-up: -2609165878727506117
+      monk-punch-active: -6072110648423440975
+      monk-punch-wind-down: -1848317282479418999
+      monk-punch-wind-up: 2317235810628766812
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
