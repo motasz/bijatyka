@@ -39,6 +39,7 @@ namespace UI.Menu.SelectionScreen
         private void OnEnable()
         {
             characterSprite.sprite = defaultPortrait;
+            characterSprite.color = new Color(0, 0, 0, 0); 
         }
 
         private void TurnAround()
