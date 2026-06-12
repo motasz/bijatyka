@@ -1,5 +1,4 @@
 ﻿using PlayerCharacter.Special;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Data
@@ -8,7 +7,7 @@ namespace Data
     public class CharacterData: ScriptableObject
     {
         public string name;
-        public AnimatorController animatorController;
+        public RuntimeAnimatorController animatorController;
         public Sprite portrait;
         public SpeciallAttack special;
     }
