@@ -216,3 +216,4 @@ MonoBehaviour:
   dodgeableBy: 1
   impact: {fileID: 0}
   activeOnAwake: 1
+  awardsEnergy: 0

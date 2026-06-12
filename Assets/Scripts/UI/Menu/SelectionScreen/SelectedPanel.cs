@@ -21,7 +21,7 @@ namespace UI.Menu.SelectionScreen
             if (id != index) return;
             
             characterSprite.sprite = character?.portrait;
-            characterSprite.color = Color.white;
+            characterSprite.color = character == null ? new Color(0, 0,0, 0) : Color.white;
             characterName.text = character?.name;
         }
 
