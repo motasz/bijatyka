@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMovementDisabled = false;
 
     public Action OnHit;
+    public Color alternativeTint;
 
     private void Awake()
     {
@@ -568,5 +569,10 @@ public class PlayerController : MonoBehaviour
 
         _animator.runtimeAnimatorController = characterData.animatorController;
         _specialAttack = characterData.special;
+
+        if (playerSelection.AreCharactersSame() && gameObject.tag == "Player2")
+        {
+            _renderer.color = alternativeTint;
+        }
     }
 }

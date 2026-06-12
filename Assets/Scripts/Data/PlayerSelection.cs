@@ -40,5 +40,10 @@ namespace Data
 
             return characters[1];
         }
+
+        public bool AreCharactersSame()
+        {
+            return characters[0]?.name ==  characters[1]?.name;
+        }
     }
 }

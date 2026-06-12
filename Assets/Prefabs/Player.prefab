@@ -216,6 +216,7 @@ MonoBehaviour:
   state: 0
   isGrounded: 0
   verticalVelocity: 0
+  alternativeTint: {r: 0.2784314, g: 0.9137255, b: 1, a: 1}
 --- !u!114 &2325418018889177129
 MonoBehaviour:
   m_ObjectHideFlags: 0
