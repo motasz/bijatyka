@@ -194,13 +194,16 @@ MonoBehaviour:
   botBasicAttackHitbox: {fileID: 7603910041473742930}
   playerSelection: {fileID: 11400000, guid: 48e9390c20702e642806250cc26dacb0, type: 2}
   horizontalClamp: 8
-  verticalClamp: -2.5
+  verticalClamp: -1.5
   minimalPlayerDistance: 1.4
   hopTime: 0.2
   hopDistance: 1.5
   midAirSpeed: 7
+  horizontalClampEnabled: 1
+  canTurn: 1
   gravityForce: -30
   jumpForce: 15
+  gravityEnabled: 1
   basicAttackData: {fileID: 11400000, guid: de15de44dff059a49b21eada2fabba71, type: 2}
   dodgeDuration: 0.5
   maxStagger: 11
@@ -208,9 +211,11 @@ MonoBehaviour:
   blinkDuration: 0.1
   stunDuration: 1
   stunMovement: 3
+  isInvincible: 0
   buffDuration: 0.3
   state: 0
   isGrounded: 0
+  verticalVelocity: 0
 --- !u!114 &2325418018889177129
 MonoBehaviour:
   m_ObjectHideFlags: 0
