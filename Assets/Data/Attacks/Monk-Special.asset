@@ -15,6 +15,7 @@ MonoBehaviour:
   specialAttackData: {fileID: 11400000, guid: fed7fbc6325fad24d88dd13112f34c27, type: 2}
   impactPrefab: {fileID: 7158325850740275872, guid: 77cace29cc38b79468295cb165782f6a, type: 3}
   miragePrefab: {fileID: 7962628477544550836, guid: 83f92fd10b1a30041a8e2140602363d0, type: 3}
+  impactSound: {fileID: 8300000, guid: c00cb21102d537942b9ddc935f55c8ea, type: 3}
   teleportOffset: 3
   blinkDelay: 0.6
   shadowlandPosition: {x: 0, y: 100, z: 0}

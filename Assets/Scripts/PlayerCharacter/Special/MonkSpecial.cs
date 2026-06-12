@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Data;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace PlayerCharacter.Special
@@ -11,6 +12,7 @@ namespace PlayerCharacter.Special
 
         public GameObject impactPrefab;
         public GameObject miragePrefab;
+        public AudioClip impactSound;
         public float teleportOffset = 1;
         public float blinkDelay = 0.5f;
         public Vector3 shadowlandPosition;
@@ -53,6 +55,7 @@ namespace PlayerCharacter.Special
             yield return null;
             playerController.canTurn = false;
             var impact = Instantiate(impactPrefab, playerController.transform.position, playerController.transform.rotation, playerController.transform); 
+            SfxPlayer.Instance.Play(impactSound);
             impact.tag = playerController.gameObject.tag;
             
             yield return new WaitForSeconds(specialAttackData.active);

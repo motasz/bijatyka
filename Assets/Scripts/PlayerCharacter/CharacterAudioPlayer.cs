@@ -24,5 +24,10 @@ namespace PlayerCharacter
         {
             _audioSource.PlayOneShot(whoosh);
         }
+
+        public void Play(AudioClip clip)
+        {
+            _audioSource.PlayOneShot(clip);
+        }
     }
 }
